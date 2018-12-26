@@ -1,0 +1,73 @@
+// Created by Andy on 2015/10/27.
+// 页面排版
+
+html {
+  //height: 100%;
+  //font-size: $n-font-size-base;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  font-family: $n-default-font-family;
+  // andy:由于flexible使用12*dpr 作为body的fontsize，但12px作为drp=1时的fontsize大小未必合适，所以这里自定义一下
+  font-size: $n-lv4-font-size-dpr-1;
+  color: $n-default-font-color;
+  margin: 0;
+}
+
+[data-dpr="2"] body {
+  // andy:由于flexible使用12*dpr 作为body的fontsize，但12px作为drp=1时的fontsize大小未必合适，所以这里自定义一下
+  font-size: $n-lv4-font-size-dpr-2;
+}
+
+[data-dpr="3"] body {
+  // andy:由于flexible使用12*dpr 作为body的fontsize，但12px作为drp=1时的fontsize大小未必合适，所以这里自定义一下
+  font-size: $n-lv4-font-size-dpr-3;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  background-image: none;
+}
+
+//h1, h2, h3, h4, h5, h6 {
+//  font-family: $n-default-font-family;
+//}
+
+a {
+  //@include n-transition(linear 0.3s color);
+  cursor: pointer;
+  text-decoration: none;
+  color: $n-default-font-color;
+
+  &:link{
+    text-decoration:none;
+  }
+  &:visited{
+    text-decoration:none;
+  }
+  &:hover{
+    text-decoration:none;
+  }
+  &:active{
+    text-decoration:none;
+  }
+}
+
+//// 统一字体
+//p, td, span, a {
+//  font-family: $n-default-font-family;
+//}
+// Box sizing
+@mixin box-sizing($boxmodel) {
+  -webkit-box-sizing: $boxmodel;
+  box-sizing: $boxmodel;
+}
+* {
+  @include box-sizing(border-box);
+}
+*:before,
+*:after {
+  @include box-sizing(border-box);
+}

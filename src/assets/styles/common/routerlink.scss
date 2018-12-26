@@ -1,0 +1,23 @@
+.router-link-active{
+  color: #4d86f1 !important;
+  border-bottom: 4px solid #4d86f1;
+}
+.course-public-header{
+  top: 0;
+  height: 95px;
+  width: 100%;
+  left: 0;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  .option{
+    display: inline-block;
+    flex: 1;
+    height: 100%;
+    font-size: 28px;
+    line-height: 95px;
+    float: left;
+    color: #666666;
+    text-align: center;
+  }
+}
+

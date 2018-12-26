@@ -1,0 +1,81 @@
+//
+// 全局变量定义
+// --------------------------------------------------
+
+////////////////////// 颜色变量 /////////////////////////
+// 白色
+$n-default-color-white:         #fff;
+// 黑色
+$n-default-color-black:         #000;
+// 橙色
+$n-default-color-orange:        #f47f00;
+// 蓝色
+$n-default-color-blue:          #31b1f7;
+// 绿色
+$n-default-color-green:         #00cc77;
+// 红色
+$n-default-color-red:           #ff2d19;
+// 粉色
+$n-default-color-pink:          #ed1e79;
+// 黄色
+$n-default-color-yellow:        #f9ba08;
+
+// 灰度颜色
+$n-default-color-gray1:         #333;
+$n-default-color-gray2:         #666;
+$n-default-color-gray3:         #999;
+$n-default-color-gray4:         #aaa;
+$n-default-color-gray5:         #ccc;
+$n-default-color-gray6:         #ddd;
+$n-default-color-gray7:         #f4f4f4;
+$n-default-color-gray8:         #eeeeee;
+
+// 主色调
+$base-color-main:               $n-default-color-green;
+
+////////////////////// 字体变量 /////////////////////////
+// 字体元素为px单位时，且考虑dpr时，使用下面的变量，使用媒体查询区分
+// lv1 字体大小，用于header 18/36/54
+$n-lv1-font-size-dpr-1:         18px;
+$n-lv1-font-size-dpr-2:         2 * $n-lv1-font-size-dpr-1;
+$n-lv1-font-size-dpr-3:         3 * $n-lv1-font-size-dpr-1;
+
+// lv2 字体大小，用于按钮 16/32/48
+$n-lv2-font-size-dpr-1:         16px;
+$n-lv2-font-size-dpr-2:         2 * $n-lv1-font-size-dpr-1;
+$n-lv2-font-size-dpr-3:         3 * $n-lv1-font-size-dpr-1;
+
+// lv3 字体大小，用于列表 14/28/42
+$n-lv3-font-size-dpr-1:         14px;
+$n-lv3-font-size-dpr-2:         2 * $n-lv1-font-size-dpr-1;
+$n-lv3-font-size-dpr-3:         3 * $n-lv1-font-size-dpr-1;
+
+// lv4 默认字体大小，最小字体，不设定字体时默认使用此字号 12/24/36
+$n-lv4-font-size-dpr-1:         12px;
+$n-lv4-font-size-dpr-2:         2 * $n-lv4-font-size-dpr-1;
+$n-lv4-font-size-dpr-3:         3 * $n-lv4-font-size-dpr-1;
+
+// 字体元素为px单位时，且不考虑dpr时使用下面的变量
+// lv1 字体大小，用于Topbar-title or Btn-font-size
+$n-lv1-font-size:               32px;
+// lv2 字体大小，用于Title or Tab
+$n-lv2-font-size:               30px;
+// lv3 字体大小，用于Links、列表、列表项
+$n-lv3-font-size:               28px;
+// lv4 默认字体大小，最小字体，用于Small Tag、列表项详细文字
+$n-lv4-font-size:               24px;
+
+// 字体元素为rem单位时，使用下面的变量
+// 750稿，对应dpr2设计，几种font-size分别为：
+$n-font-size-750-32:            .42667rem;
+$n-font-size-750-30:            .4rem;
+$n-font-size-750-28:            .37333rem;
+$n-font-size-750-24:            .32rem;
+
+$n-font-size-750-36:            .48rem;
+$n-font-size-750-48:            .64rem;
+$n-font-size-750-60:            .8rem;
+
+// 全局默认字体
+$n-default-font-family:         "Microsoft YaHei", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", sans-serif !default;
+$n-default-font-color:          $n-default-color-gray2;
