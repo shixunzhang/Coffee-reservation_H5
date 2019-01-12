@@ -9,6 +9,17 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+
+
+      // '/api':{
+      //   target:'http://app.dxzjjl.cn/api',
+      //   changeOrigin:true,
+      //   pathRewrite: {
+      //     '^/api': ''
+      //   }
+      // },
+
+
     },
 
     // Various Dev Server settings

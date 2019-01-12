@@ -31,6 +31,8 @@ import VCharts from 'v-charts'
 import Calendar from 'vue2-datepick';
 
 import echarts from 'echarts'
+//导入swiper依赖的css文件
+import 'swiper/dist/css/swiper.css'
 
 
 Vue.prototype.$echarts = echarts

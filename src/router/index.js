@@ -3,6 +3,10 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
 
+import home_page from '@/views/home_page/home_page'
+import menu from '@/views/menu/menu'
+import shopping_cart from '@/views/shopping_cart/shopping_cart'
+import order from '@/views/order/order'
 
 // 导入help路由
 import help_problem from '@/views/user_center/help/problem'
@@ -38,7 +42,6 @@ export default new Router({
       name: 'problem_answer',
       component: problem_answer
     },
-
     // 关于我们
     {
       path: '/user-center/help/about-us',
@@ -56,6 +59,31 @@ export default new Router({
       name:'data_center',
       component:data_center
     },
+
+
+    {
+      path:'/home-page',
+      name:'home_page',
+      component:home_page
+    },
+
+    {
+      path:'/menu',
+      name:'menu',
+      component:menu
+    },
+    {
+      path:'/shopping',
+      name:'shopping_cart',
+      component:shopping_cart
+    },
+    {
+      path:'/order',
+      name:'order',
+      component:order
+    },
+
+
 
 
 
