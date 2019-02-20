@@ -11,15 +11,13 @@ module.exports = {
     proxyTable: {
 
 
-      // '/api':{
-      //   target:'http://app.dxzjjl.cn/api',
-      //   changeOrigin:true,
-      //   pathRewrite: {
-      //     '^/api': ''
-      //   }
-      // },
-
-
+      '/api':{
+        target:'http://localhost:8090/api',
+        changeOrigin:true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      },
     },
 
     // Various Dev Server settings

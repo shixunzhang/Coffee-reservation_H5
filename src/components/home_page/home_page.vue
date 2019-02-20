@@ -1,7 +1,6 @@
 <template>
   <div class="home-box">
 
-  <div>这是主页哦</div>
     <div class="advertising-wrapper">
       <div class="swiper-container">
         <ul class="swiper-wrapper">

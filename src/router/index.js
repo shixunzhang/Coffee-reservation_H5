@@ -7,6 +7,7 @@ import home_page from '@/views/home_page/home_page'
 import menu from '@/views/menu/menu'
 import shopping_cart from '@/views/shopping_cart/shopping_cart'
 import order from '@/views/order/order'
+import user from '@/views/user/user'
 
 // 导入help路由
 import help_problem from '@/views/user_center/help/problem'
@@ -28,8 +29,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'home_page',
+      component: home_page
     },
     // 个人中心-常见问题
     {
@@ -82,10 +83,10 @@ export default new Router({
       name:'order',
       component:order
     },
-
-
-
-
-
+    {
+      path:'/user',
+      name:'user',
+      component:user
+    },
   ]
 })

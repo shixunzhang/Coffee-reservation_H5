@@ -1,6 +1,7 @@
+
 <template>
   <div>
-    <v-Menu></v-Menu>
+    <v-User></v-User>
     <div class="foot">
       <v-Foot></v-Foot>
     </div>
@@ -9,20 +10,22 @@
 </template>
 
 <script>
-  import  vMenu from "@/components/menu/menu";
+  import  vUser from "@/components/user/user";
   import  vFoot from "@/components/common/foot";
   export default {
-    name: "mune",
-    components: {
-      vMenu,
+    name: "user",
+    components:{
+      vUser,
       vFoot
-    },
+    }
   }
 </script>
 
 <style scoped lang="scss">
   .foot{
-    position: fixed;
+    position: absolute;
     bottom: 0;
   }
+
 </style>
+
