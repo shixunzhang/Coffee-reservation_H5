@@ -16,21 +16,21 @@
       <ul>
         <li v-for="(item,key) in MenuList">
           <div class="menu-img">
-            <!--<img v-bind:src="item.goods_img">-->
-            <img src="../../assets/images/goods/icon_coffee/kafei_1.png">
+            <img v-bind:src="item.goodsImg">
+            <!--<img src="../../assets/images/goods/icon_coffee/kafei_1.png">-->
           </div>
           <div class="menu-right">
             <div class="menu-name">
-              {{item.goods_name}}
+              {{item.goodsName}}
             </div>
             <div class="menu-name-en">
-              {{item.goods_name_en}}
+              {{item.goodsNameEn}}
             </div>
           </div>
           <div class="menu-price">
-            ￥{{item.goods_price}}
+            ￥{{item.goodsPrice}}
           </div>
-          <img class="add-img" src="../../assets/images/home_page/plus-circle-fill.png" @click="AddCoffee(key)">
+          <img class="add-img" src="../../assets/images/home_page/plus-circle-fill.png" @click="AddCoffee(item.goodsId)">
         </li>
       </ul>
     </div>
@@ -41,6 +41,7 @@
 <script>
     export default {
       name: "menu",
+      props:["message"],
       data(){
         return{
           search_type:0,
@@ -50,27 +51,50 @@
             {title:"甜品"},
           ],
           MenuList:[
-            {id:1,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:2,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:3,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:4,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:5,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:6,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:7,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:8,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:9,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:10,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
-            {id:11,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/../../../assets/images/help_problem_images/setup_icon_up@2x.png',goods_price:20},
+            {id:1,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_1.png',goods_price:20},
+            {id:2,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_2.png',goods_price:20},
+            {id:3,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_3.png',goods_price:20},
+            {id:4,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_4.png',goods_price:20},
+            {id:5,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_5.png',goods_price:20},
+            {id:6,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_6.png',goods_price:20},
+            {id:7,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_7.png',goods_price:20},
+            {id:8,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_8.png',goods_price:20},
+            {id:9,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_9.png',goods_price:20},
+            {id:10,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_10.png',goods_price:20},
+            {id:11,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_11.png',goods_price:20},
           ]
+        }
+      },
+      watch:{
+        message(val){
+          this.MenuList = val;
+          console.log("yemian");
+          console.log(this.MenuList)
         }
       },
       methods:{
         changeSearchTitle(num){
           this.search_type = num;
-          console.log(num)
+
+          this.$http.post('/api/goods/list.do',
+            {
+              goodsCategory:num+1
+            },
+          ).then((res)=>{
+            if(res.data.success){
+              this.MenuList = res.data.data
+              console.log(this.MenuList)
+            }else{
+
+            }
+          }).catch(error =>{
+            console.log("请求异常"+error)
+          })
         },
+
         AddCoffee(num){
-          console.log(this.MenuList[num].id,this.MenuList[num].goods_name)
+          // console.log(this.MenuList[num].id,this.MenuList[num].goods_name)
+          console.log(num)
         }
       }
     }
