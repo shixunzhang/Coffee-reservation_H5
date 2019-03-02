@@ -10,13 +10,33 @@
         </li>
       </ul>
     </div>
-  </div>
 
+    <!--菜单列表-->
+    <div class="order">
+      <ul>
+        <li v-for="item in OrderList">
+          <div class="menu-right">
+            <div class="menu-name">
+              {{item.orderNo}}{{item.totalPrice}}
+            </div>
+            <div class="menu-name-en">
+              {{item.orderAddress}}
+              {{item.goodsSize}}
+            </div>
+          </div>
+          <div class="menu-price">
+            ￥{{item.totalPrice}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
   export default {
     name: "order",
+    props:["message"],
     data(){
       return{
         search_type:0,
@@ -25,13 +45,45 @@
           {title:"已完成"},
           {title:"未完成"},
         ],
+        OrderList:[]
+      }
+    },
+    watch:{
+      message(val){
+        this.OrderList = val;
+        console.log(this.OrderList)
       }
     },
     methods:{
       changeSearchTitle(num){
         this.search_type = num;
+        let finishFlag;
+        if (num == 0) {
+          finishFlag = 3
+        }
+        else if(num==1){
+          finishFlag = 1
+        }
+        else if(num==2){
+          finishFlag = 0
+        }
         console.log(num)
-      }
+        this.$http.post('/api/order/list.do',
+          {
+            userId:100,
+            finishFlag:finishFlag
+          },
+        ).then((res)=>{
+          if(res.data.success){
+            this.OrderList = res.data.data
+            console.log(this.OrderList)
+          }else{
+
+          }
+        }).catch(error =>{
+          console.log("请求异常"+error)
+        })
+      },
     }
   }
 </script>
@@ -43,9 +95,9 @@
       border-bottom: 4px solid #4d86f1;
     }
     .link-title{
+      border-bottom: 15px solid #eeeeee;
       ul{
         height: 94px;
-        border-bottom: 1px solid #e6e6e6;
       }
       li{
         position: relative;

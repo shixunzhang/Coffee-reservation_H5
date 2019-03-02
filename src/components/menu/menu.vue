@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="menu-price">
-            ￥{{item.goodsPrice}}
+            ￥{{item.goodsPriceSmall}}
           </div>
           <img class="add-img" src="../../assets/images/home_page/plus-circle-fill.png" @click="AddCoffee(item.goodsId)">
         </li>

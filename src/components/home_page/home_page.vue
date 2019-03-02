@@ -5,7 +5,7 @@
       <div class="swiper-container">
         <ul class="swiper-wrapper">
           <li class="swiper-slide" v-for="item of adList">
-            <img :src="item.imgSrc" alt="" @click="handleHref(item.id)">
+            <img :src="item.imgSrc" @click="handleHref(item.id)">
           </li>
         </ul>
         <!-- 如果需要分页器 -->
@@ -28,22 +28,22 @@
         return {
           adList: [
             {
-              imgSrc: '/static/images/car(1).png',
+              imgSrc: '/static/images/ad/ad1.jpg',
               adTitle: '广告标题',
               url: 'xxx'
             },
             {
-              imgSrc: '/static/images/car(1).png',
+              imgSrc: '/static/images/ad/ad2.jpg',
               adTitle: '广告标题',
               url: 'xxx'
             },
             {
-              imgSrc: '/static/images/car(1).png',
+              imgSrc: '/static/images/ad/ad3.jpg',
               adTitle: '广告标题',
               url: 'xxx'
             },
             {
-              imgSrc: '/static/images/car(1).png',
+              imgSrc: '/static/images/ad/ad4.jpg',
               adTitle: '广告标题',
               url: 'xxx'
             }
@@ -52,10 +52,6 @@
       },
       methods: {
         handleHref(url) {
-          let _url = url;
-          if(window.$App){
-            window.$App.intoCommonWebViewActivity(_url)
-          }
         }
       },
       mounted() {

@@ -4,7 +4,7 @@
     <div class="foot-img" @click="GoMenu"><img src="../../assets/images/home_page/menu(1).png"><span>菜单</span></div>
     <div class="foot-img" @click="GoOrder"><img src="../../assets/images/home_page/container(1).png"><span>订单</span></div>
     <div class="foot-img" @click="GoShooping"><img src="../../assets/images/home_page/car(1).png"><span>购物车</span></div>
-    <div class="foot-img" @click="GoUser"><img src="../../assets/images/home_page/user(1).png"><span>我的</span></div>
+    <div class="foot-img" @click="GoUser"><img src="../../assets/images/home_page/setting.png"><span>设置</span></div>
 
   </div>
 
