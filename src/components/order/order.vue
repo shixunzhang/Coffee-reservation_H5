@@ -17,7 +17,7 @@
         <li v-for="item in OrderList">
           <div class="menu-right">
             <div class="menu-name">
-              {{item.orderNo}}{{item.totalPrice}}
+              {{item.orderNo}}{{item.totalPrice}}{{item.goodName}}
             </div>
             <div class="menu-name-en">
               {{item.orderAddress}}

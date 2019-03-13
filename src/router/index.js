@@ -8,10 +8,12 @@ import menu from '@/views/menu/menu'
 import shopping_cart from '@/views/shopping_cart/shopping_cart'
 import order from '@/views/order/order'
 import user from '@/views/user/user'
+import about_us from '@/views/user/about_us'
+import user_detail from '@/views/user/user_detail'
 
 // 导入help路由
 import help_problem from '@/views/user_center/help/problem'
-import about_us from '@/views/user_center/help/about_us'
+// import about_us from '@/views/user_center/help/about_us'
 import problem_answer from '@/views/user_center/help/problem_answer'
 
 
@@ -87,6 +89,16 @@ export default new Router({
       path:'/user',
       name:'user',
       component:user
+    },
+    {
+      path:'/about',
+      name:'about_us',
+      component:about_us
+    },
+    {
+      path:'/user-detail',
+      name:'user_detail',
+      component:user_detail
     },
   ]
 })

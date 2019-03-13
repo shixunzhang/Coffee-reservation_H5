@@ -51,10 +51,7 @@
             this.list_data.token = this.$route.query.token;
           if (this.$route.query.userId != undefined)
             this.list_data.userId = this.$route.query.userId;
-
           this.$store.commit('LIST_DATA', this.list_data);
-
-
         }
       }
   }
@@ -62,7 +59,7 @@
 
 <style scoped lang="scss">
   .foot{
-    position: absolute;
+    position: fixed;
     bottom: 0;
   }
 

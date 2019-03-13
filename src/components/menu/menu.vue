@@ -17,7 +17,6 @@
         <li v-for="(item,key) in MenuList">
           <div class="menu-img">
             <img v-bind:src="item.goodsImg">
-            <!--<img src="../../assets/images/goods/icon_coffee/kafei_1.png">-->
           </div>
           <div class="menu-right">
             <div class="menu-name">
@@ -30,12 +29,48 @@
           <div class="menu-price">
             ￥{{item.goodsPriceSmall}}
           </div>
-          <img class="add-img" src="../../assets/images/home_page/plus-circle-fill.png" @click="AddCoffee(item.goodsId)">
+          <img class="add-img" src="../../assets/images/home_page/plus-circle-fill.png" @click="AddCoffee(key)">
         </li>
       </ul>
     </div>
-  </div>
 
+    <div class="zhezhao" v-if="win_display">
+      <div class="goods-select-window" v-if="win_display">
+        <img class="head-img-beauuty" src="/static/images/else/undraw_coffee_break_j3of.png">
+        <img class="close-img" src="/static/images/home_page/close-circle.png" @click="closeWin()">
+        <img class="win-goods-img" v-bind:src="MenuList[this.select_item].goodsImg">
+        <div class="select-item" v-if="this.MenuList[0].goodsCategory!=3">
+          <span>规格：</span>
+          <button v-if="goods_size!=1" @click="ChangeSize(1)">小杯</button>
+          <button class="on" v-if="goods_size===1" @click="ChangeSize(1)">小杯</button>
+          <button v-if="goods_size!=2" @click="ChangeSize(2)">中杯</button>
+          <button class="on" v-if="goods_size===2" @click="ChangeSize(2)">中杯</button>
+          <button v-if="goods_size!=3" @click="ChangeSize(3)">大杯</button>
+          <button class="on" v-if="goods_size===3" @click="ChangeSize(3)">大杯</button>
+        </div>
+        <div class="select-item" v-if="this.MenuList[0].goodsCategory===1">
+          <span>糖度：</span>
+          <button v-if="goods_sugar!=0" @click="ChangeSugar(0)">无糖</button>
+          <button class="on" v-if="goods_sugar===0" @click="ChangeSugar(0)">无糖</button>
+          <button v-if="goods_sugar!=1" @click="ChangeSugar(1)">加糖</button>
+          <button class="on" v-if="goods_sugar===1" @click="ChangeSugar(1)">加糖</button>
+        </div>
+        <div class="select-item">
+          <span>数量：</span>
+          <img src="/static/images/home_page/minus-circle.png" @click="downImgBtn()">
+          {{this.goods_num}}
+          <img src="/static/images/home_page/plus-circle-fill.png" @click="addImgBtn()">
+        </div>
+        <div class="select-item">
+            ￥<span class="js-total-price">{{this.goods_num*this.goods_price}}</span>
+        </div>
+        <div class="submit-btn" @click="submitBtn()">
+          <img src="/static/images/else/car.png">加入购物车
+        </div>
+      </div>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -45,56 +80,111 @@
       data(){
         return{
           search_type:0,
+          select_item:0,
+          win_display:false,
+
+          goods_price:0,
+          goods_size:1,
+          goods_sugar:0,
+          goods_num:1,
+          goods_id:"",
+          goods_name:"",
+
           showList:[
             {title:"咖啡"},
             {title:"饮料"},
             {title:"甜品"},
           ],
-          MenuList:[
-            {id:1,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_1.png',goods_price:20},
-            {id:2,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_2.png',goods_price:20},
-            {id:3,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_3.png',goods_price:20},
-            {id:4,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_4.png',goods_price:20},
-            {id:5,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_5.png',goods_price:20},
-            {id:6,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_6.png',goods_price:20},
-            {id:7,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_7.png',goods_price:20},
-            {id:8,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_8.png',goods_price:20},
-            {id:9,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_9.png',goods_price:20},
-            {id:10,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_10.png',goods_price:20},
-            {id:11,goods_name:'拿铁咖啡',goods_name_en:'natei',goods_category:1,goods_img:'/static/images/goods/icon_coffee/kafei_11.png',goods_price:20},
-          ]
+          MenuList:[]
         }
       },
       watch:{
         message(val){
           this.MenuList = val;
-          console.log("yemian");
-          console.log(this.MenuList)
         }
       },
       methods:{
         changeSearchTitle(num){
           this.search_type = num;
-
           this.$http.post('/api/goods/list.do',
-            {
-              goodsCategory:num+1
-            },
+            {goodsCategory:num+1},
           ).then((res)=>{
             if(res.data.success){
               this.MenuList = res.data.data
               console.log(this.MenuList)
             }else{
-
+              alert("查询商品列表失败")
             }
           }).catch(error =>{
             console.log("请求异常"+error)
           })
         },
-
         AddCoffee(num){
-          // console.log(this.MenuList[num].id,this.MenuList[num].goods_name)
-          console.log(num)
+          this.select_item=num;
+          this.goods_sugar = 0;
+          this.goods_num = 1;
+          this.goods_price = this.MenuList[num].goodsPriceSmall;
+          this.goods_id = this.MenuList[num].goodsId;
+          this.goods_name = this.MenuList[num].goodsName;
+          this.win_display = true;
+        },
+        downImgBtn(){
+          if(this.goods_num === 1){
+            alert("已经是最少了哦！")
+          }else{
+            this.goods_num = this.goods_num-1;
+          }
+        },
+        addImgBtn(){
+          this.goods_num = this.goods_num+1;
+        },
+        ChangeSize(num){
+          this.goods_size = num;
+          if(num === 1){
+            this.goods_price = this.MenuList[this.select_item].goodsPriceSmall
+          }else if(num===2){
+            this.goods_price = this.MenuList[this.select_item].goodsPriceBetween
+          }else if(num===3){
+            this.goods_price = this.MenuList[this.select_item].goodsPriceBig
+          }
+        },
+        ChangeSugar(num){
+          this.goods_sugar = num;
+        },
+        closeWin(){
+          this.win_display = false;
+        },
+        submitBtn(){
+          console.log(this.goods_size);
+          console.log(this.goods_sugar);
+          console.log(this.goods_num*this.goods_price);
+          console.log(this.goods_id);
+          console.log(this.goods_name);
+          console.log(this.goods_num);
+          this.$http.post('/api/shopping/addShopping.do',
+            {
+              goodSize:this.goods_size,
+              goodSugar:this.goods_sugar,
+              shoppingNumber:this.goods_num,
+              goodPrice:this.goods_price,
+              goodsId:this.goods_id,
+              goodName:this.goods_name,
+              totalPrice:(this.goods_price*this.goods_num),
+              userId:100
+            },
+          ).then((res)=>{
+            if(res.data.success){
+              this.win_display = false;
+            }else{
+              alert("加入购物车失败")
+              this.win_display = false;
+            }
+          }).catch(error =>{
+            console.log("请求异常"+error)
+            this.win_display = false;
+          })
+
+
         }
       }
     }
@@ -148,10 +238,90 @@
         width: 130px;
       }
     }
+    /*商品属性选择窗口*/
+    .zhezhao{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .goods-select-window{
+      position: fixed;
+      top: 200px;
+      background-color: #ffffff;
+      border: 1px solid;
+      height: 700px;
+      width: 650px;
+      margin-left: 55px;
+      border-radius: 20px;
+      .select-item{
+        margin-left: 30px;
+        margin-top: 30px;
+      }
+      span{
+        font-size: 30px;
+      }
+      .js-total-price{
+        font-size: 40px;
+        color: #ff2d19;
+      }
+      .head-img-beauuty{
+        width: 100%;
+        height: 300px;
+        border-radius: 20px 20px 0 0;
+        border-bottom: 1px solid #999999;
+      }
+      .close-img{
+        position: fixed;
+        top: 210px;
+        left: 630px;
+        height: 50px;
+        width: 50px;
+      }
+      img{
+        height: 50px;
+        width: 50px;
+      }
+      .win-goods-img{
+        height: 160px;
+        width: 160px;
+        right: 35px;
+        top: 375px;
+        position: absolute;
+        border: 1px solid #333333;
+      }
+      button{
+        height: 40px;
+        width: 80px;
+        border: 1px solid #4d86f1;
+        color: #ffffff;
+        border-radius: 30px;
+        background-color: #f47f00;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+      button.on{
+        background-color: #4d86f1;
+      }
+      .submit-btn{
+        background-color: #4d86f1;
+        color: #ffffff;
+        font-size: 25px;
+        width: 200px;
+        height: 60px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        line-height: 60px;
+      }
+    }
 
 
 
-
+ /*上部tab样式*/
     .router-link-active {
       color: #4d86f1 !important;
       border-bottom: 4px solid #4d86f1;

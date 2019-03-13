@@ -2,7 +2,7 @@
   <div class="user-box">
     <div class="user-center-head-msg">
       <img src="/static/images/goods/icon_yinliao/yinliao_1.png">
-      <span><!--{{name}}-->喜讯同学</span>
+      <span>{{user.userNick}}</span>
     </div>
 
     <div class="user-center-body-msg">
@@ -29,17 +29,24 @@
 <script>
   export default {
     name: "user",
+    props:["userData"],
     data(){
       return{
         menuList:[
-          {title:"个人资料",imgUrl:"/static/images/home_page/user(1).png",goPage:"/menu"},
+          {title:"个人资料",imgUrl:"/static/images/home_page/user(1).png",goPage:"/user-detail"},
           {title:"帮助反馈",imgUrl:"/static/images/home_page/mail_fill.png",goPage:"/home-page"},
           {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/menu"},
-          {title:"关于我们",imgUrl:"/static/images/home_page/switch_user.png",goPage:"/menu"},
+          {title:"关于我们",imgUrl:"/static/images/home_page/switch_user.png",goPage:"/about"},
         ],
-        OrderList:[]
+        user:{}
     }
   },
+    watch:{
+      userData(val){
+        this.user = val;
+        console.log(this.user)
+      }
+    },
     methods:{
     }
 }
@@ -50,10 +57,11 @@
     .user-center-head-msg{
       background-color: #f9ba08;
       height: 180px;
+      font-size: 30px;
       img{
         height: 90px;
         width: 90px;
-        border-radius: 30px;
+        border-radius: 45px;
         background-color: #31b1f7;
         border: 2px solid #333333;
         margin: 50px 30px 0 50px;

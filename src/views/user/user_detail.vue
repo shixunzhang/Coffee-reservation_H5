@@ -1,22 +1,16 @@
-
 <template>
   <div>
-    <v-User :userData="DATA"></v-User>
-    <div class="foot">
-      <v-Foot></v-Foot>
-    </div>
-  </div>
+    <v-UserDetail :userData="DATA"></v-UserDetail>
 
+  </div>
 </template>
 
 <script>
-  import  vUser from "@/components/user/user";
-  import  vFoot from "@/components/common/foot";
+  import  vUserDetail from "@/components/user/user_detail";
   export default {
-    name: "user",
+    name: "user_detail",
     components:{
-      vUser,
-      vFoot
+      vUserDetail,
     },
     data() {
       return {
@@ -46,7 +40,6 @@
     },
     methods: {
       getArticleData() {
-
         if (this.$route.query.token != undefined)
           this.list_data.token = this.$route.query.token;
         if (this.$route.query.userId != undefined)
@@ -62,6 +55,6 @@
     position: absolute;
     bottom: 0;
   }
-
 </style>
+
 
