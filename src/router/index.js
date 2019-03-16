@@ -10,6 +10,7 @@ import order from '@/views/order/order'
 import user from '@/views/user/user'
 import about_us from '@/views/user/about_us'
 import user_detail from '@/views/user/user_detail'
+import feedback from '@/views/user/feedback'
 
 // 导入help路由
 import help_problem from '@/views/user_center/help/problem'
@@ -99,6 +100,11 @@ export default new Router({
       path:'/user-detail',
       name:'user_detail',
       component:user_detail
+    },
+    {
+      path:'/feedback',
+      name:'feedback',
+      component:feedback
     },
   ]
 })

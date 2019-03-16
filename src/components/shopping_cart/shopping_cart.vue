@@ -33,21 +33,24 @@
           <div class="shopping-price-total">
             ￥<span>{{item.totalPrice}}</span>
           </div>
-          <div class="shopping-good-size" v-if="item.goodSize===1">
-            小杯
+          <div class="shopping-good-size" v-if="item.goodCategory!=3">
+            <div class="shopping-good-size" v-if="item.goodSize===1">
+              小杯
+            </div>
+            <div class="shopping-good-size" v-else-if="item.goodSize===2">
+              中杯
+            </div>
+            <div class="shopping-good-size" v-else-if="item.goodSize===3">
+              大杯
+            </div>
           </div>
-          <div class="shopping-good-size" v-else-if="item.goodSize===2">
-            中杯
-          </div>
-          <div class="shopping-good-size" v-else-if="item.goodSize===3">
-            大杯
-          </div>
-
-          <div class="shopping-good-sugar" v-if="item.goodSugar===0">
-            无糖
-          </div>
-          <div class="shopping-good-sugar" v-if="item.goodSugar===1">
-            加糖
+          <div class="shopping-good-sugar" v-if="item.goodCategory===1">
+            <div class="shopping-good-sugar" v-if="item.goodSugar===0">
+              无糖
+            </div>
+            <div class="shopping-good-sugar" v-if="item.goodSugar===1">
+              加糖
+            </div>
           </div>
         </li>
       </ul>
@@ -226,7 +229,7 @@
         width: 40%;
         color: #333;
         position: relative;
-        top: 20px;
+        top: 30px;
         left: 40px;
       }
       .shopping-price-total{
@@ -250,14 +253,14 @@
         display: inline-block;
         position: relative;
         top: 25px;
-        left: 40px;
+        left: 20px;
       }
       .shopping-good-size{
         font-size: 25px;
         display: inline-block;
         position: relative;
         top: 25px;
-        left: 40px;
+        left: 20px;
       }
     }
 

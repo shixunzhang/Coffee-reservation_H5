@@ -89,6 +89,7 @@
           goods_num:1,
           goods_id:"",
           goods_name:"",
+          good_category:"",
 
           showList:[
             {title:"咖啡"},
@@ -123,9 +124,11 @@
           this.select_item=num;
           this.goods_sugar = 0;
           this.goods_num = 1;
+          this.goods_size = 1;
           this.goods_price = this.MenuList[num].goodsPriceSmall;
           this.goods_id = this.MenuList[num].goodsId;
           this.goods_name = this.MenuList[num].goodsName;
+          this.good_category = this.MenuList[num].goodsCategory;
           this.win_display = true;
         },
         downImgBtn(){
@@ -169,6 +172,7 @@
               goodPrice:this.goods_price,
               goodsId:this.goods_id,
               goodName:this.goods_name,
+              goodCategory:this.good_category,
               totalPrice:(this.goods_price*this.goods_num),
               userId:100
             },

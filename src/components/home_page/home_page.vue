@@ -8,15 +8,19 @@
             <img :src="item.imgSrc" @click="handleHref(item.id)">
           </li>
         </ul>
-        <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
-        <!-- 如果需要导航按钮 -->
-        <!--<div class="swiper-button-prev"></div>-->
-        <!--<div class="swiper-button-next"></div>-->
-        <!-- 如果需要滚动条 -->
-        <!--<div class="swiper-scrollbar"></div>-->
       </div>
     </div>
+
+    <el-switch
+      style="display: block;"
+      v-model="value4"
+      active-color="#13ce66"
+      inactive-color="#4d86f1"
+      active-text="自提"
+      inactive-text="外卖">
+    </el-switch>
+    <mt-switch v-model="value3">开关</mt-switch>
   </div>
 </template>
 
@@ -26,6 +30,8 @@
       name: "home_page",
       data() {
         return {
+          value3: true,
+          value4: true,
           adList: [
             {
               imgSrc: '/static/images/ad/ad1.jpg',

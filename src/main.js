@@ -10,6 +10,9 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css'
+
 
 //导入mock文件
 import Mock from './mock'
@@ -41,9 +44,10 @@ require('echarts-wordcloud')
 // 通过use方法加载axios插件
 Vue.use(VueAxios,axios);
 
-Vue.use(MintUI)
-Vue.use(VCharts)
+Vue.use(MintUI);
+Vue.use(VCharts);
 Vue.use(Calendar);
+Vue.use(ElementUI);
 
 Vue.use(Viewer);
 Viewer.setDefaults({
