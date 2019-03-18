@@ -12,15 +12,24 @@
       </div>
     </div>
 
-    <el-switch
-      style="display: block;"
-      v-model="value4"
-      active-color="#13ce66"
-      inactive-color="#4d86f1"
-      active-text="自提"
-      inactive-text="外卖">
-    </el-switch>
-    <mt-switch v-model="value3">开关</mt-switch>
+    <div class="user-center-body-msg">
+      <ul>
+        <li>
+          <mt-switch class="home-switch" v-model="value3" @change="change()">{{value4}}</mt-switch>
+        </li>
+        <li v-for="(item,key) in homeList">
+          <router-link v-bind:to="item.goPage">
+            <img class="menu-img" v-bind:src="item.imgUrl">
+            <div class="body-title">
+              <span>{{item.title}}</span>
+            </div>
+            <img class="img-right-goto" src="../../assets/images/home_page/right.png">
+          </router-link>
+        </li>
+      </ul>
+    </div>
+
+
   </div>
 </template>
 
@@ -31,7 +40,13 @@
       data() {
         return {
           value3: true,
-          value4: true,
+          value4: "自提",
+          homeList:[
+            {title:"立即下单",imgUrl:"/static/images/home_page/user(1).png",goPage:"/menu"},
+            {title:"更改地址",imgUrl:"/static/images/home_page/location.png",goPage:"/feedback"},
+            {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/menu"},
+            {title:"关于我们",imgUrl:"/static/images/home_page/switch_user.png",goPage:"/about"},
+          ],
           adList: [
             {
               imgSrc: '/static/images/ad/ad1.jpg',
@@ -58,6 +73,13 @@
       },
       methods: {
         handleHref(url) {
+        },
+        change(){
+          if(this.value3===true){
+            this.value4 = "自提"
+          }
+          if(this.value3===false)
+          this.value4 = "外卖"
         }
       },
       mounted() {
@@ -67,11 +89,6 @@
           pagination: {
             el:'.swiper-pagination'
           },
-          // 如果需要前进后
-          // nextButton: '.swiper-button-next',
-          // prevButton: '.swiper-button-prev',
-          // 如果需要滚动条
-          // scrollbar: '.swiper-scrollbar',
           autoplay: {
             delay: 3000
           }
@@ -82,6 +99,44 @@
 
 <style scoped lang="scss">
   .home-box{
+    .user-center-body-msg{
+      ul{
+        border-top: 2px solid #cccccc;
+        /*border-bottom: 30px solid #cccccc;*/
+      }
+      li{
+        height: 100px;
+        border-bottom: 1px solid #DDDDDD;
+        font-size: 35px;
+        .home-switch{
+          position: relative;
+          top: 30px;
+          width: 150px;
+          left: 550px;
+          /*margin-top: 20px;*/
+        }
+        .menu-img{
+          height: 50px;
+          width: 50px;
+          margin-left: 30px;
+        }
+        .body-title{
+          display: inline-block;
+          margin-top: 30px;
+          line-height: 30px;
+          width: 560px;
+        }
+      }
+      .img-right-goto{
+        height: 40px;
+        width: 40px;
+        /*position: relative;*/
+        /*left: 600px;*/
+        /*top: 10px;*/
+        /*margin-left: 630px;*/
+        /*float: right;*/
+      }
+    }
     .advertising-wrapper {
       padding: 30px;
       border-radius: 10px;

@@ -128,8 +128,8 @@
     text-align: center;
     line-height: 80px;
     border-radius: 20px;
-    position: absolute;
-    bottom: 100px;
+    position: relative;
+    top: 140px;
   }
 }
 </style>
