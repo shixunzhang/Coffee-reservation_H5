@@ -42,7 +42,7 @@
           value3: true,
           value4: "自提",
           homeList:[
-            {title:"立即下单",imgUrl:"/static/images/home_page/user(1).png",goPage:"/menu"},
+            {title:"立即下单",imgUrl:"/static/images/home_page/shopping.png",goPage:"/menu"},
             {title:"更改地址",imgUrl:"/static/images/home_page/location.png",goPage:"/feedback"},
             {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/menu"},
             {title:"关于我们",imgUrl:"/static/images/home_page/switch_user.png",goPage:"/about"},

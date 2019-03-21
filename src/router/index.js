@@ -11,6 +11,7 @@ import user from '@/views/user/user'
 import about_us from '@/views/user/about_us'
 import user_detail from '@/views/user/user_detail'
 import feedback from '@/views/user/feedback'
+import avatar_select from '@/views/user/avatar_select'
 
 // 导入help路由
 import help_problem from '@/views/user_center/help/problem'
@@ -105,6 +106,11 @@ export default new Router({
       path:'/feedback',
       name:'feedback',
       component:feedback
+    },
+    {
+      path:'/avatar-select',
+      name:'avatar_select',
+      component:avatar_select
     },
   ]
 })

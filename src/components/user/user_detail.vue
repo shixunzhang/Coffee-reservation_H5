@@ -5,11 +5,11 @@
       <img class="img-left-goto" src="/static/images/home_page/left.png" @click="goUserCenter()">
     </div>
     <ul>
-      <li>
+      <li @click="changeAvatar()">
         <span>
           选择头像
         </span>
-        <img class="img-avatar" src="/static/images/touxiang/touxiang1.jpg">
+        <img class="img-avatar" v-bind:src="userMsg.userPortrait">
         <img class="img-right-goto" src="../../assets/images/home_page/right.png">
       </li>
       <li>
@@ -24,7 +24,16 @@
           性别:
         </span>
         {{userMsg.userSex}}
-        <input type="text" placeholder="请输入你的昵称">
+        <select>
+          <option>男</option>
+          <option>女</option>
+        </select>
+      </li>
+      <li>
+        <span>
+          绑定手机:
+        </span>
+        +86 {{userMsg.userPhone}}
       </li>
       <li>
         <span>
@@ -63,6 +72,9 @@
       goUserCenter(){
         this.$router.push({path: '/user'});
       },
+      changeAvatar(){
+        this.$router.push({path:'/avatar-select'})
+      },
     }
   }
 </script>
@@ -86,13 +98,14 @@
     li{
       border-bottom: 1px solid #999999;
       min-height: 80px;
+      line-height: 80px;
       span{
         font-size: 30px;
       }
       .img-avatar{
         height: 80px;
         width: 80px;
-        border-radius: 35px;
+        border-radius: 40px;
         margin: 20px 0 20px 20px;
       }
       .img-right-goto{
