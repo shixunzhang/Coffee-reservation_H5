@@ -12,17 +12,7 @@ import about_us from '@/views/user/about_us'
 import user_detail from '@/views/user/user_detail'
 import feedback from '@/views/user/feedback'
 import avatar_select from '@/views/user/avatar_select'
-
-// 导入help路由
-import help_problem from '@/views/user_center/help/problem'
-// import about_us from '@/views/user_center/help/about_us'
-import problem_answer from '@/views/user_center/help/problem_answer'
-
-
-//导入我的日程  数据中心  热词
-import info_date from '@/views/user_center/info/date'
-import data_center from '@/views/user_center/data_center/data_center'
-
+import login from '@/views/login/login'
 
 Vue.use(Router)
 
@@ -33,45 +23,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home_page',
-      component: home_page
+      name: 'login',
+      component: login
     },
-    // 个人中心-常见问题
-    {
-      path: '/user-center/help/problem',
-      name: 'help_problem',
-      component: help_problem
-    },
-    {
-      path: '/user-center/help/problem-answer',
-      name: 'problem_answer',
-      component: problem_answer
-    },
-    // 关于我们
-    {
-      path: '/user-center/help/about-us',
-      name: 'about_us',
-      component: about_us
-    },
-    // 我的日程
-    {
-      path: '/user-center/info/date',
-      name:'info_date',
-      component:info_date
-    },
-    {
-      path:'/user-center/data',
-      name:'data_center',
-      component:data_center
-    },
-
-
     {
       path:'/home-page',
       name:'home_page',
       component:home_page
     },
-
     {
       path:'/menu',
       name:'menu',
@@ -111,6 +70,11 @@ export default new Router({
       path:'/avatar-select',
       name:'avatar_select',
       component:avatar_select
+    },
+    {
+      path:'/login',
+      name:'login',
+      component:login
     },
   ]
 })

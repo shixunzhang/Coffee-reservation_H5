@@ -56,7 +56,7 @@ Viewer.setDefaults({
 
 
 Vue.config.productionTip = false
-Vue.prototype.$API = 'http://app.dxzjjl.cc'
+Vue.prototype.$API = 'http://localhost:8090'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

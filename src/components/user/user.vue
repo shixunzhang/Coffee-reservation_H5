@@ -1,7 +1,7 @@
 <template>
   <div class="user-box">
     <div class="user-center-head-msg">
-      <img src="/static/images/goods/icon_yinliao/yinliao_1.png">
+      <img v-bind:src="user.userPortrait">
       <span>{{user.userNick}}</span>
     </div>
 

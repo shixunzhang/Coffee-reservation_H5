@@ -3,11 +3,9 @@
     <div class="foot-img" @click="GoHome"><img src="../../assets/images/home_page/home(1).png"><span>首页</span></div>
     <div class="foot-img" @click="GoMenu"><img src="../../assets/images/home_page/menu(1).png"><span>菜单</span></div>
     <div class="foot-img" @click="GoOrder"><img src="../../assets/images/home_page/container(1).png"><span>订单</span></div>
-    <div class="foot-img" @click="GoShooping"><img src="../../assets/images/home_page/car(1).png"><span>购物车</span></div>
+    <div class="foot-img" @click="GoShopping"><img src="../../assets/images/home_page/car(1).png"><span>购物车</span></div>
     <div class="foot-img" @click="GoUser"><img src="../../assets/images/home_page/setting.png"><span>设置</span></div>
-
   </div>
-
 
 </template>
 
@@ -25,7 +23,7 @@
         GoOrder(){
           this.$router.push('/order')
         },
-        GoShooping(){
+        GoShopping(){
           this.$router.push('/shopping')
         },
         GoMenu(){

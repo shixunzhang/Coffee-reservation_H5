@@ -37,10 +37,12 @@
   import Swiper from 'swiper'
     export default {
       name: "home_page",
+      props:["userData"],
       data() {
         return {
           value3: true,
           value4: "自提",
+          user:{},
           homeList:[
             {title:"立即下单",imgUrl:"/static/images/home_page/shopping.png",goPage:"/menu"},
             {title:"更改地址",imgUrl:"/static/images/home_page/location.png",goPage:"/feedback"},
@@ -76,10 +78,31 @@
         },
         change(){
           if(this.value3===true){
-            this.value4 = "自提"
+            this.changeTakeOut(0);
           }
           if(this.value3===false)
-          this.value4 = "外卖"
+            this.changeTakeOut(1);
+        },
+        changeTakeOut(flag){
+          this.$http.post('/api/user/change-take-out.do',
+            {
+              userId:100,
+              takeOut:flag,
+            },
+          ).then((res)=>{
+            if(res.data.success){
+              if(flag===0){
+                this.value4 = "自提";
+              }else if(flag===1){
+                this.value4 = "外卖"
+              }
+              alert("成功");
+            }else{
+              alert("失败")
+            }
+          }).catch(error =>{
+            console.log("请求异常"+error)
+          });
         }
       },
       mounted() {
@@ -93,6 +116,19 @@
             delay: 3000
           }
         })
+      },
+      watch:{
+        userData(val){
+          this.user = val;
+          if(this.user.takeOut===1){
+            this.value3=false;
+            this.value4 = "外卖";
+          }else if(this.user.takeOut===0){
+            this.value3=true;
+            this.value4 = "自提";
+          }
+          console.log(this.user)
+        }
       },
     }
 </script>

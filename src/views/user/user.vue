@@ -31,7 +31,7 @@
 
       this.$http.post('/api/user/detail.do',
         {
-          userId:101
+          userId:100
         },
       ).then((res)=>{
         if(res.data.success){
