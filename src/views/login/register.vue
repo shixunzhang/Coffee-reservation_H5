@@ -1,15 +1,15 @@
 <template>
   <div>
-    <v-Login></v-Login>
+    <v-Register></v-Register>
   </div>
 </template>
 
 <script>
-  import  vLogin from "@/components/common/login";
+  import vRegister from "@/components/common/register";
     export default {
-      name: "login",
+      name: "register",
       components:{
-        vLogin
+        vRegister
       }
     }
 </script>

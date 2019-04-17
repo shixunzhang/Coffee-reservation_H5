@@ -10,45 +10,56 @@
           选择头像
         </span>
         <img class="img-avatar" v-bind:src="userMsg.userPortrait">
-        <img class="img-right-goto" src="../../assets/images/home_page/right.png">
+        <img class="img-right-change-avatar" src="../../assets/images/home_page/right.png">
       </li>
-      <li>
+      <li @click="changeUserMessage(0)">
         <span>
           昵称:
         </span>
-        {{userMsg.userNick}}
-        <input type="text" placeholder="请输入你的昵称">
+        <img class="img-right-goto" src="../../assets/images/home_page/right.png">
+        <span class="mag-right">
+           {{userMsg.userNick}}
+        </span>
       </li>
-      <li>
+      <li @click="changeUserMessage(1)">
         <span>
           性别:
         </span>
-        {{userMsg.userSex}}
-        <select>
-          <option>男</option>
-          <option>女</option>
-        </select>
+        <img class="img-right-goto" src="../../assets/images/home_page/right.png">
+        <span class="mag-right" v-if="userMsg.userSex===1">
+        男
+        </span>
+        <span class="mag-right"  v-if="userMsg.userSex===0">
+          女
+        </span>
+        <!--<select>-->
+          <!--<option>男</option>-->
+          <!--<option>女</option>-->
+        <!--</select>-->
       </li>
-      <li>
+      <li @click="changeUserMessage(2)">
         <span>
           绑定手机:
         </span>
-        +86 {{userMsg.userPhone}}
+        <img class="img-right-goto" src="../../assets/images/home_page/right.png">
+        <span class="mag-right">
+          +86 {{userMsg.userPhone}}
+        </span>
       </li>
-      <li>
+      <li @click="changeUserMessage(3)">
         <span>
           修改密码
         </span>
         <img class="img-right-goto" src="../../assets/images/home_page/right.png">
       </li>
-      <li>
+      <li @click="changeUserMessage(4)">
         <span>
           收货地址
         </span>
         <img class="img-right-goto" src="../../assets/images/home_page/right.png">
       </li>
     </ul>
-    <div class="logout">退出登录</div>
+    <div class="logout" @click="logout()">退出登录</div>
 
   </div>
 </template>
@@ -69,12 +80,34 @@
       }
     },
     methods:{
+      changeUserMessage(num){
+        // num:0-昵称  1-性别  2-手机号   3-密码  4-地址
+        if(num === 0){
+          this.$router.push({path: '/change-user?flag=0'});
+        }
+        if(num === 1){
+          this.$router.push({path: '/change-user?flag=1'});
+        }
+        if(num === 2){
+          this.$router.push({path: '/change-user?flag=2'});
+        }
+        if(num === 3){
+          this.$router.push({path: '/change-user?flag=3'});
+        }
+        if(num === 4){
+          this.$router.push({path: '/change-user?flag=4'});
+        }
+      },
       goUserCenter(){
         this.$router.push({path: '/user'});
       },
       changeAvatar(){
         this.$router.push({path:'/avatar-select'})
       },
+      logout(){
+        this.$store.commit('USER_DATA',null);
+        this.$router.push({path:'/login'})
+      }
     }
   }
 </script>
@@ -101,17 +134,32 @@
       line-height: 80px;
       span{
         font-size: 30px;
+        margin-left: 30px;
+      }
+      .mag-right{
+        font-size: 28px;
+        float: right;
+        margin-right: 30px;
       }
       .img-avatar{
         height: 80px;
         width: 80px;
         border-radius: 40px;
-        margin: 20px 0 20px 20px;
+        margin: 20px 0 20px 400px;
       }
       .img-right-goto{
         float: right;
         height: 30px;
         width: 30px;
+        margin-top: 27px;
+        margin-right: 30px;
+      }
+      .img-right-change-avatar{
+        float: right;
+        height: 30px;
+        width: 30px;
+        margin-top: 45px;
+        margin-right: 30px;
       }
     }
     .logout{

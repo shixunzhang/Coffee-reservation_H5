@@ -54,6 +54,9 @@
           </li>
       </ul>
     </div>
+    <div class="emptyMag" v-if="ShoppingList.length===0">购物车中空空如也...
+      <p @click="goToMenu()">去菜单中挑选</p>
+    </div>
     <div class="settlement-total-box">
       应付合计：<span>￥{{total_price}}</span>
       <div class="goto-settlement" @click="addOrder()">去结算</div>
@@ -75,19 +78,23 @@
           ShoppingList:[],
           checkList:[],
           settlement:[],
+          selectIdList:[],
         }
       },
       watch:{
         message(val){
           this.ShoppingList = val;
-          console.log(this.ShoppingList);
           for (let i=0; i<this.ShoppingList.length; i++){
             this.checkList.push({"flag":false});
           }
         }
       },
       methods:{
-        // 商品数量减
+        // 跳转到菜单页面
+        goToMenu(){
+          this.$router.push('/menu')
+        },
+        // 商品数量减1
         shoppingDown(num){
           if(this.ShoppingList[num].shoppingNumber===1){
             this.select_num = num;
@@ -105,7 +112,9 @@
                 alert("成功");
                 this.ShoppingList[num].shoppingNumber=this.ShoppingList[num].shoppingNumber-1;
                 this.ShoppingList[num].totalPrice=(this.ShoppingList[num].goodPrice*(this.ShoppingList[num].shoppingNumber));
-
+                if(this.checkList[num].flag===true){
+                  this.total_price=(this.total_price-this.ShoppingList[num].goodPrice)
+                }
               }else{
                 alert("失败")
               }
@@ -125,6 +134,9 @@
             ).then((res)=>{
               if(res.data.success){
                 alert("成功");
+                if(this.checkList[this.select_num].flag===true){
+                  this.total_price=(this.total_price-this.ShoppingList[this.select_num].goodPrice)
+                }
                 this.ShoppingList.splice(this.select_num,1);
                 this.checkList.splice(this.select_num,1);
                 this.msg_win = false;
@@ -152,6 +164,9 @@
               alert("成功");
               this.ShoppingList[num].shoppingNumber=this.ShoppingList[num].shoppingNumber+1;
               this.ShoppingList[num].totalPrice=(this.ShoppingList[num].goodPrice*(this.ShoppingList[num].shoppingNumber));
+              if(this.checkList[num].flag===true){
+                this.total_price=(this.total_price+this.ShoppingList[num].goodPrice)
+              }
             }else{
               alert("失败")
             }
@@ -170,11 +185,21 @@
         },
         // 下单
         addOrder(){
+          if(this.total_price===0){
+            alert("请先选择结算商品")
+            return
+          }
           let me = this;
           this.settlement=[];
+          this.selectIdList=[];
+          let ShoppingListLeft=[];
           this.checkList.forEach(function (item,index) {
             if(item.flag===true){
-              me.settlement.push(me.ShoppingList[index])
+              me.settlement.push(me.ShoppingList[index]);
+              me.selectIdList.push(index)
+            }
+            else{
+              ShoppingListLeft.push(me.ShoppingList[index])
             }
           });
 
@@ -186,13 +211,19 @@
           ).then((res)=>{
             if(res.data.success){
               alert("成功");
+              this.ShoppingList = ShoppingListLeft;
+              this.checkList=[];
+              for (let i=0; i<this.ShoppingList.length; i++){
+                this.checkList.push({"flag":false});
+              }
+              this.total_price=0;
+              alert("删除成功");
             }else{
               alert("失败")
             }
           }).catch(error =>{
             console.log("请求异常"+error)
           });
-          console.log(this.settlement)
         },
       }
     }
@@ -326,6 +357,17 @@
         position: relative;
         top: 25px;
         left: 20px;
+      }
+    }
+    /*购物车为空时显示信息*/
+    .emptyMag{
+      font-size: 30px;
+      width: 100%;
+      text-align: center;
+      p{
+        margin-top: 20px;
+        font-size: 26px;
+        color: #4d86f1;
       }
     }
     /*去结算div*/

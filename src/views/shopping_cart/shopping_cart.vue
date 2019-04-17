@@ -26,11 +26,10 @@
         }
       },
       created(){
-        // this.getArticleData();
 
         this.$http.post('/api/shopping/list.do',
           {
-            userId:100
+            userId:this.$store.state.user_data.userId
           },
         ).then((res)=>{
           if(res.data.success){
@@ -44,14 +43,6 @@
         })
       },
       methods: {
-        getArticleData() {
-
-          if (this.$route.query.token != undefined)
-            this.list_data.token = this.$route.query.token;
-          if (this.$route.query.userId != undefined)
-            this.list_data.userId = this.$route.query.userId;
-          this.$store.commit('LIST_DATA', this.list_data);
-        }
       }
     }
 </script>

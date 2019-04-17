@@ -25,7 +25,7 @@
       created(){
         this.$http.post('/api/user/detail.do',
           {
-            userId:100
+            userId:this.$store.state.user_data.userId
           },
         ).then((res)=>{
           if(res.data.success){

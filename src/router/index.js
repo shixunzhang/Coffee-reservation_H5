@@ -13,6 +13,9 @@ import user_detail from '@/views/user/user_detail'
 import feedback from '@/views/user/feedback'
 import avatar_select from '@/views/user/avatar_select'
 import login from '@/views/login/login'
+import register from '@/views/login/register'
+import find_password from '@/views/login/find_password'
+import change_user from '@/views/user/change_user'
 
 Vue.use(Router)
 
@@ -75,6 +78,21 @@ export default new Router({
       path:'/login',
       name:'login',
       component:login
+    },
+    {
+      path:'/change-user',
+      name:'change_user',
+      component:change_user
+    },
+    {
+      path:'/register',
+      name:'register',
+      component:register
+    },
+    {
+      path:'/find-password',
+      name:'find_password',
+      component:find_password
     },
   ]
 })

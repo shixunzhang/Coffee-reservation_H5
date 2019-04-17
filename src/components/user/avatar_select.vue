@@ -53,7 +53,8 @@
       },
       methods:{
         goUserCenter(){
-          this.$router.push({path: '/user-detail'});
+          // this.$router.push({path: '/user-detail'});
+          window.history.back()
         },
         selectDetail(num){
           this.select_show=true;
@@ -62,7 +63,7 @@
         selectCommit(){
           this.$http.post('/api/user/change-avatar.do',
             {
-              userId:100,
+              userId:this.$store.state.user_data.userId,
               userPortrait:this.avatarList[this.select_num].imgUrl,
             },
           ).then((res)=>{

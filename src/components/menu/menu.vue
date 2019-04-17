@@ -170,11 +170,11 @@
               goodSugar:this.goods_sugar,
               shoppingNumber:this.goods_num,
               goodPrice:this.goods_price,
-              goodsId:this.goods_id,
+              goodId:this.goods_id,
               goodName:this.goods_name,
               goodCategory:this.good_category,
               totalPrice:(this.goods_price*this.goods_num),
-              userId:100
+              userId:this.$store.state.user_data.userId
             },
           ).then((res)=>{
             if(res.data.success){
@@ -187,8 +187,6 @@
             console.log("请求异常"+error)
             this.win_display = false;
           })
-
-
         }
       }
     }

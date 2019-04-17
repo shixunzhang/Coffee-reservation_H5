@@ -30,6 +30,10 @@
         </li>
       </ul>
     </div>
+    <div class="emptyMsg" v-if="OrderList.length===0">
+      <span>还没有相关订单</span>
+      <p @click="goToShopping()">去购物车中下单</p>
+    </div>
   </div>
 </template>
 
@@ -70,7 +74,7 @@
         console.log(num)
         this.$http.post('/api/order/list.do',
           {
-            userId:100,
+            userId:this.$store.state.user_data.userId,
             finishFlag:finishFlag
           },
         ).then((res)=>{
@@ -84,6 +88,9 @@
           console.log("请求异常"+error)
         })
       },
+      goToShopping(){
+        this.$router.push("/shopping")
+      }
     }
   }
 </script>
@@ -121,7 +128,16 @@
         left: 105px;
       }
     }
+    .emptyMsg{
+     text-align: center;
+      font-size: 30px;
+      margin-top: 50px;
+      p{
+        margin-top: 20px;
+        color: #4d86f1;
+        font-size: 26px;
+      }
+    }
 
   }
-
 </style>

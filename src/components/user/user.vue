@@ -1,7 +1,7 @@
 <template>
   <div class="user-box">
     <div class="user-center-head-msg">
-      <img v-bind:src="user.userPortrait">
+      <img v-bind:src="user.userPortrait" @click="changeAvatar()">
       <span>{{user.userNick}}</span>
     </div>
 
@@ -48,6 +48,9 @@
       }
     },
     methods:{
+      changeAvatar(){
+        this.$router.push({path:'/avatar-select'})
+      }
     }
 }
 </script>

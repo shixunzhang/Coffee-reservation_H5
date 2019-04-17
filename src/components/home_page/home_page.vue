@@ -86,7 +86,7 @@
         changeTakeOut(flag){
           this.$http.post('/api/user/change-take-out.do',
             {
-              userId:100,
+              userId:this.$store.state.user_data.userId,
               takeOut:flag,
             },
           ).then((res)=>{

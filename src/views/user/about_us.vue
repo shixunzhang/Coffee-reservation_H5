@@ -12,6 +12,7 @@
         vAbout,
       },
     }
+
 </script>
 
 <style scoped>

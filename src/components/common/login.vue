@@ -37,8 +37,8 @@
   </div>
 
     <div class="open_new">
-      <span class="register">注册新账号</span>
-      <span class="find">忘记密码</span>
+      <span class="register" @click="goRegister()">注册新账号</span>
+      <span class="find" @click="goFindPassword()">忘记密码</span>
     </div>
 
   </div>
@@ -57,16 +57,50 @@
       },
       methods:{
         loginPhone(){
-          // !(/^1[34578]\d{9}$/.test(val))
-          alert(this.phone_num )
-          alert(this.password_num )
-          this.$router.push('/home-page')
+          if(this.phone_num===null||this.phone_num===''){
+            alert("请先输入手机号码");
+            return;
+          }
+          if(!(/^1[34578]\d{9}$/.test(this.phone_num))){
+            alert("请正确填写手机号码");
+            return;
+          }
+          if(this.password_num===null||this.password_num===''){
+            alert("请先输入密码");
+            return;
+          }
+          if(!(/^[a-zA-Z0-9]{6,16}$/.test(this.password_num))){
+            alert("请正确填写密码");
+            return;
+          }
+          this.$http.post('/api/user/login.do',
+            {
+              userPhone:this.phone_num,
+              userPassword:this.password_num,
+            },
+          ).then((res)=>{
+            if(res.data.success){
+              console.log(res.data);
+              this.$store.commit('USER_DATA',res.data.data);
+              alert("登录成功");
+              this.$router.push('/home-page')
+            }else{
+              alert(res.data.msg)
+            }
+          }).catch(error =>{
+            console.log("请求异常"+error)
+          });
         },
         loginValidate(){
-          // !(/^1[34578]\d{9}$/.test(val))
           alert(this.phone_num)
           alert(this.validate_num)
           this.$router.push('/home-page')
+        },
+        goRegister(){
+          this.$router.push('/register')
+        },
+        goFindPassword(){
+          this.$router.push('/find-password')
         }
       }
     }
@@ -236,7 +270,6 @@
       }
     }
   }
-
   .open_new{
     width: 80%;
     overflow: hidden;

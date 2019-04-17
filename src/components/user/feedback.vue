@@ -63,7 +63,7 @@
             {
               feedbackText:this.question_detail,
               contactInformation:this.contact,
-              userId:100
+              userId:this.$store.state.user_data.userId
             },
           ).then((res)=>{
             if(res.data.success){
