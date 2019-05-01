@@ -43,7 +43,12 @@
 <style scoped lang="scss">
   .about-ue-base-box{
     .user-detail-head{
+      position: fixed;
+      top: 0;
+      width: 100%;
       height: 110px;
+      background-color: #ffffff;
+      z-index: 100;
       border-bottom: 20px solid #eeeeee;
       text-align: center;
       font-size: 30px;
@@ -55,6 +60,9 @@
         height: 40px;
         width: 40px;
       }
+    }
+    ul{
+      margin-top: 120px;
     }
     li{
       margin: 40px 40px 20px 40px;

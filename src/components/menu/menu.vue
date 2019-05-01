@@ -196,6 +196,9 @@
   .menu-box{
     margin-bottom: 90px;
     .menu{
+      ul{
+        margin-top: 1.4rem;
+      }
       li{
         border-bottom: 1px solid #999999;
         height: 150px;
@@ -248,7 +251,7 @@
       right: 0;
       bottom: 0;
       background: rgba(0,0,0,0.3);
-      z-index: 10;
+      z-index: 200;
     }
     .goods-select-window{
       position: fixed;
@@ -329,6 +332,11 @@
       border-bottom: 4px solid #4d86f1;
     }
     .link-title{
+      position: fixed;
+      top: 0;
+      background-color: #ffffff;
+      z-index: 100;
+      border-bottom: 15px solid #eeeeee;
       ul{
         height: 94px;
         border-bottom: 1px solid #e6e6e6;

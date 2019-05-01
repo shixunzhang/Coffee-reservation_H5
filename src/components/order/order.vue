@@ -102,6 +102,10 @@
       border-bottom: 4px solid #4d86f1;
     }
     .link-title{
+      position: fixed;
+      top: 0;
+      background-color: #ffffff;
+      z-index: 100;
       border-bottom: 15px solid #eeeeee;
       ul{
         height: 94px;
@@ -131,11 +135,16 @@
     .emptyMsg{
      text-align: center;
       font-size: 30px;
-      margin-top: 50px;
+      margin-top: 3rem;
       p{
         margin-top: 20px;
         color: #4d86f1;
         font-size: 26px;
+      }
+    }
+    .order{
+      ul{
+        margin-top: 1.6rem;
       }
     }
 

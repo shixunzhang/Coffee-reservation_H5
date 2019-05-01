@@ -2,8 +2,10 @@
   <div class="login-base-box">
     <div class="header_guide">
       <ul>
-        <li class="header-active" @click="select_flag=true">手机密码登录</li>
-        <li @click="select_flag=false">验证码登录</li>
+        <li v-if="select_flag" class="header-active" @click="select_flag=true">手机密码登录</li>
+        <li v-if="!select_flag"  @click="select_flag=true">手机密码登录</li>
+        <li v-if="!select_flag" class="header-active" @click="select_flag=false">验证码登录</li>
+        <li v-if="select_flag" @click="select_flag=false">验证码登录</li>
       </ul>
     </div>
 
@@ -194,7 +196,7 @@
       }
     }
     .header-active{
-      color:#333333 !important;
+      color:#4d86f1 !important;
       position: relative;
     }
     .header-active::after{

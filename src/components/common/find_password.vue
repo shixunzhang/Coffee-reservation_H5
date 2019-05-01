@@ -52,7 +52,7 @@
     text-align: center;
     line-height: 125px;
     color: #4d86f1;
-    border-bottom: 1px solid #333333;
+    border-bottom: 0.2rem solid #eeeeee;
   }
 
   .open_new{

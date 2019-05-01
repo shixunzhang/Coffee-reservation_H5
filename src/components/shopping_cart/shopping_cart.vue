@@ -5,16 +5,17 @@
         <div class="tips-title">
           <span>这是最后一杯，确定不要了吗？</span>
         </div>
-        <div class="msg-btn" @click="deleteCommit()">
-          <span>残忍移除</span>
-        </div>
-        <div class="msg-btn" @click="deleteClose()">
-          <span>我再想想</span>
-        </div>
-
+        <ul>
+          <li class="msg-btn msg-box-close" @click="deleteClose()">
+            我再想想
+          </li>
+          <li class="msg-btn msg-box-del" @click="deleteCommit()">
+            残忍移除
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="head-msg"><p>购物车</p></div>
+    <div class="head-msg">购物车</div>
     <!--购物车列表-->
     <div class="shopping">
       <ul>
@@ -238,36 +239,38 @@
       right: 0;
       bottom: 0;
       background: rgba(0,0,0,0.3);
-      z-index: 10;
+      z-index: 200;
     }
     /*选择提示窗口*/
     .js-tips-modal{
       position: absolute;
       top: 400px;
-      background-color: #e5e5e5;
+      border-radius: 15px;
+      background-color: #ffffff;
       z-index: 20;
       border: 1px solid #4d86f1;
       height: 260px;
-      width: 90%;
-      margin-left: 5%;
+      width: 70%;
+      margin-left: 15%;
       .tips-title{
         text-align: center;
         font-size: 30px;
         margin-top: 50px;
       }
       .msg-btn{
-        height: 40px;
-        width: 150px;
-        border-radius: 20px;
-        border: 1px solid #4d86f1;
+        height: 1.05rem;
+        position: relative;
+        font-size: 30px;
         text-align: center;
-        font-size: 25px;
-        line-height: 40px;
-        margin-left: 120px;
+        line-height: 1.1rem;
+        top: 1.3rem;
+        width: 49%;
         display: inline-block;
-        background-color: #4d86f1;
-        color: #ffffff;
-        margin-top: 80px;
+        border-top: 1px solid #eeeeee;
+      }
+      .msg-box-close{
+        border-right: 1px solid #eeeeee;
+        color: #4d86f1;
       }
     }
     /*头部显示信息*/
@@ -277,18 +280,15 @@
       width: 100%;
       z-index: 100;
       background-color: #ffffff;
-      height: 60px;
+      height: 100px;
       font-size: 30px;
       text-align: center;
-      line-height: 40px;
-      border-bottom: 10px solid #cccccc;
-      p{
-        margin-top: 10px;
-      }
+      line-height: 100px;
+      border-bottom: 15px solid #eeeeee;
     }
     /*购物车列表*/
     .shopping{
-      margin-top: 70px;
+      margin-top: 1.3rem;
       padding-bottom: 100px;
       li{
         border-bottom: 1px solid #999999;

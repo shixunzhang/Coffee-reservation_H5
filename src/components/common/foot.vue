@@ -3,7 +3,7 @@
     <div class="foot-img" @click="GoHome"><img src="../../assets/images/home_page/home(1).png"><span>首页</span></div>
     <div class="foot-img" @click="GoMenu"><img src="../../assets/images/home_page/menu(1).png"><span>菜单</span></div>
     <div class="foot-img" @click="GoOrder"><img src="../../assets/images/home_page/container(1).png"><span>订单</span></div>
-    <div class="foot-img" @click="GoShopping"><img src="../../assets/images/home_page/car(1).png"><span>购物车</span></div>
+    <div class="foot-img" @click="GoShopping"><img class="foot-car-img" src="../../assets/images/home_page/car(1).png"><span class="foot-car-text">购物车</span></div>
     <div class="foot-img" @click="GoUser"><img src="../../assets/images/home_page/setting.png"><span>设置</span></div>
   </div>
 
@@ -53,6 +53,13 @@
         position: relative;
         left: 45px;
         top: 5px;
+      }
+      .foot-car-img{
+        margin-left: 10px;
+      }
+      .foot-car-text{
+        position: relative;
+        left: -0.0133333rem;
       }
       span{
         position: relative;
