@@ -96,9 +96,9 @@
               }else if(flag===1){
                 this.value4 = "外卖"
               }
-              alert("成功");
+              this.$toast("成功");
             }else{
-              alert("失败")
+              this.$toast("失败")
             }
           }).catch(error =>{
             console.log("请求异常"+error)

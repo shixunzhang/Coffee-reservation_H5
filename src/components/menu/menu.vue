@@ -114,7 +114,7 @@
               this.MenuList = res.data.data
               console.log(this.MenuList)
             }else{
-              alert("查询商品列表失败")
+              this.$toast("查询商品列表失败")
             }
           }).catch(error =>{
             console.log("请求异常"+error)
@@ -133,7 +133,7 @@
         },
         downImgBtn(){
           if(this.goods_num === 1){
-            alert("已经是最少了哦！")
+            this.$toast("已经是最少了哦！")
           }else{
             this.goods_num = this.goods_num-1;
           }
@@ -180,7 +180,7 @@
             if(res.data.success){
               this.win_display = false;
             }else{
-              alert("加入购物车失败")
+              this.$toast("加入购物车失败")
               this.win_display = false;
             }
           }).catch(error =>{

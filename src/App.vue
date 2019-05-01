@@ -11,27 +11,12 @@
     name: 'App',
     data() {
       return {
-        // viewport: {},
-        // fontSize: '',
       }
     },
-    // mounted(){
-    //   this.fontSize = document.querySelector('html').style.fontSize
-    //   this.viewport.width = window.screen.width
-    //   this.viewport.height = window.screen.height
-    //   this.viewport.dpr = window.devicePixelRatio
-    // },
-    // updated(){
-    //   this.fontSize = document.querySelector('html').style.fontSize
-    //   this.viewport.width = window.screen.width
-    //   this.viewport.height = window.screen.height
-    //   this.viewport.dpr = window.devicePixelRatio
-    // }
   }
 </script>
 
-<style>
+<style lang="scss">
   #app {
-
-  }
+    }
 </style>

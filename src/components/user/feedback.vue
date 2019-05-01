@@ -40,23 +40,23 @@
         },
         commitMsg(){
           if(this.commit_flag===true){
-            alert("您已经反馈过了");
+            this.$toast("您已经反馈过了");
             return
           }
           if(this.question_detail===''||this.question_detail===null){
-            alert("请输入反馈信息");
+            this.$toast("请输入反馈信息");
             return
           }
           if(this.question_detail.length>200){
-            alert("反馈信息不超过200字");
+            this.$toast("反馈信息不超过200字");
             return
           }
           if(this.contact===''||this.contact===null){
-            alert("请输入反馈信息");
+            this.$toast("请输入反馈信息");
             return
           }
           if(!/^1[34578]\d{9}$/.test(this.contact)&&!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(this.contact)){
-            alert("请输入正确联系信息");
+            this.$toast("请输入正确联系信息");
             return
           }
           this.$http.post('/api/feedback/increase.do',
@@ -68,11 +68,12 @@
           ).then((res)=>{
             if(res.data.success){
               this.commit_flag=true;
-              alert("意见反馈成功")
+              this.$toast("意见反馈成功")
             }else{
-              alert("意见反馈失败")
+              this.$toast("意见反馈失败")
             }
           }).catch(error =>{
+            this.$toast('服务器开小差');
             console.log("请求异常"+error)
           })
         }

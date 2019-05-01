@@ -71,7 +71,7 @@
       props:["message"],
       data(){
         return{
-          search_type:0,
+        search_type:0,
           select_num:0,
           msg_win:false,
           total_price:0,
@@ -109,14 +109,14 @@
               },
             ).then((res)=>{
               if(res.data.success){
-                alert("成功");
+                this.$toast("成功");
                 this.ShoppingList[num].shoppingNumber=this.ShoppingList[num].shoppingNumber-1;
                 this.ShoppingList[num].totalPrice=(this.ShoppingList[num].goodPrice*(this.ShoppingList[num].shoppingNumber));
                 if(this.checkList[num].flag===true){
                   this.total_price=(this.total_price-this.ShoppingList[num].goodPrice)
                 }
               }else{
-                alert("失败")
+                this.$toast("失败")
               }
             }).catch(error =>{
               console.log("请求异常"+error)
@@ -133,7 +133,7 @@
               },
             ).then((res)=>{
               if(res.data.success){
-                alert("成功");
+                this.$toast("成功");
                 if(this.checkList[this.select_num].flag===true){
                   this.total_price=(this.total_price-this.ShoppingList[this.select_num].goodPrice)
                 }
@@ -141,7 +141,7 @@
                 this.checkList.splice(this.select_num,1);
                 this.msg_win = false;
               }else{
-                alert("失败")
+                this.$toast("失败")
               }
             }).catch(error =>{
               console.log("请求异常"+error)
@@ -161,14 +161,14 @@
             },
           ).then((res)=>{
             if(res.data.success){
-              alert("成功");
+              this.$toast("成功");
               this.ShoppingList[num].shoppingNumber=this.ShoppingList[num].shoppingNumber+1;
               this.ShoppingList[num].totalPrice=(this.ShoppingList[num].goodPrice*(this.ShoppingList[num].shoppingNumber));
               if(this.checkList[num].flag===true){
                 this.total_price=(this.total_price+this.ShoppingList[num].goodPrice)
               }
             }else{
-              alert("失败")
+              this.$toast(res.data.msg)
             }
           }).catch(error =>{
             console.log("请求异常"+error)
@@ -186,7 +186,7 @@
         // 下单
         addOrder(){
           if(this.total_price===0){
-            alert("请先选择结算商品")
+            this.$toast("请先选择结算商品")
             return
           }
           let me = this;
@@ -210,16 +210,15 @@
             },
           ).then((res)=>{
             if(res.data.success){
-              alert("成功");
+              this.$toast("成功");
               this.ShoppingList = ShoppingListLeft;
               this.checkList=[];
               for (let i=0; i<this.ShoppingList.length; i++){
                 this.checkList.push({"flag":false});
               }
               this.total_price=0;
-              alert("删除成功");
             }else{
-              alert("失败")
+              this.$toast(res.data.msg)
             }
           }).catch(error =>{
             console.log("请求异常"+error)

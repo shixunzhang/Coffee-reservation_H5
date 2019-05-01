@@ -13,9 +13,8 @@ import VueAxios from 'vue-axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
-
 //导入mock文件
-import Mock from './mock'
+// import Mock from './mock'
 //导入自定义lib-flexible
 import '@/assets/script/flexible'
 //导入mint-ui作为ui组件库
@@ -23,6 +22,7 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 //导入清除默认css样式文件
 import '@/assets/styles/reset.css'
+import '@/assets/styles/toast.css'
 //解决一像素边框问题：引入一项素解决方案的border.css文件
 import '@/assets/styles/border.css'
 
@@ -55,9 +55,8 @@ Viewer.setDefaults({
 });
 
 
-Vue.config.productionTip = false
-Vue.prototype.$API = 'http://localhost:8090'
-/* eslint-disable no-new */
+Vue.config.productionTip = false;
+Vue.prototype.$API = 'http://localhost:8090';
 new Vue({
   el: '#app',
   router,
