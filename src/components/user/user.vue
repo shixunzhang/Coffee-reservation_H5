@@ -35,7 +35,7 @@
         menuList:[
           {title:"个人资料",imgUrl:"/static/images/home_page/user(1).png",goPage:"/user-detail"},
           {title:"帮助反馈",imgUrl:"/static/images/home_page/mail_fill.png",goPage:"/feedback"},
-          {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/menu"},
+          {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/address"},
           {title:"关于我们",imgUrl:"/static/images/home_page/switch_user.png",goPage:"/about"},
         ],
         user:{}
@@ -44,7 +44,6 @@
     watch:{
       userData(val){
         this.user = val;
-        console.log(this.user)
       }
     },
     methods:{

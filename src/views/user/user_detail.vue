@@ -29,6 +29,7 @@
       ).then((res)=>{
         if(res.data.success){
           this.$data.DATA = res.data.data
+          this.$store.commit('USER_DATA',res.data.data);
           console.log(this.$data.DATA)
         }else{
           console.log(res.data)

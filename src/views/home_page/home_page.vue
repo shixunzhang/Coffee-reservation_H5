@@ -5,7 +5,6 @@
       <v-Foot></v-Foot>
     </div>
   </div>
-
 </template>
 
 <script>

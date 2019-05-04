@@ -52,12 +52,12 @@
         </span>
         <img class="img-right-goto" src="../../assets/images/home_page/right.png">
       </li>
-      <li @click="changeUserMessage(4)">
-        <span>
-          收货地址
-        </span>
-        <img class="img-right-goto" src="../../assets/images/home_page/right.png">
-      </li>
+      <!--<li @click="changeUserMessage(4)">-->
+        <!--<span>-->
+          <!--收货地址-->
+        <!--</span>-->
+        <!--<img class="img-right-goto" src="../../assets/images/home_page/right.png">-->
+      <!--</li>-->
     </ul>
     <div class="logout" @click="logout()">退出登录</div>
 
@@ -76,7 +76,6 @@
     watch:{
       userData(val){
         this.userMsg = val;
-        console.log(this.userMsg)
       }
     },
     methods:{

@@ -1,12 +1,16 @@
 <template>
   <div class="foot-box">
-    <div class="foot-img" @click="GoHome"><img src="../../assets/images/home_page/home(1).png"><span>首页</span></div>
-    <div class="foot-img" @click="GoMenu"><img src="../../assets/images/home_page/menu(1).png"><span>菜单</span></div>
-    <div class="foot-img" @click="GoOrder"><img src="../../assets/images/home_page/container(1).png"><span>订单</span></div>
-    <div class="foot-img" @click="GoShopping"><img class="foot-car-img" src="../../assets/images/home_page/car(1).png"><span class="foot-car-text">购物车</span></div>
-    <div class="foot-img" @click="GoUser"><img src="../../assets/images/home_page/setting.png"><span>设置</span></div>
+    <div v-if="!page1" class="foot-img" @click="GoHome"><img src="../../assets/images/home/home(1).png"><span>首页</span></div>
+    <div v-if="page1" class="foot-img" @click="GoHome"><img src="../../assets/images/home/home.png"><span>首页</span></div>
+    <div v-if="!page2" class="foot-img" @click="GoMenu"><img src="../../assets/images/home/coffee.png"><span>菜单</span></div>
+    <div v-if="page2" class="foot-img" @click="GoMenu"><img src="../../assets/images/home/coffee(1).png"><span>菜单</span></div>
+    <div v-if="!page3" class="foot-img" @click="GoOrder"><img src="../../assets/images/home/dingdan(1).png"><span>订单</span></div>
+    <div v-if="page3" class="foot-img" @click="GoOrder"><img src="../../assets/images/home/dingdan(2).png"><span>订单</span></div>
+    <div v-if="!page4" class="foot-img" @click="GoShopping"><img class="foot-car-img" src="../../assets/images/home/car(1).png"><span class="foot-car-text">购物车</span></div>
+    <div v-if="page4" class="foot-img" @click="GoShopping"><img class="foot-car-img" src="../../assets/images/home/car.png"><span class="foot-car-text">购物车</span></div>
+    <div v-if="!page5" class="foot-img" @click="GoUser"><img src="../../assets/images/home/setting1.png"><span>设置</span></div>
+    <div v-if="page5" class="foot-img" @click="GoUser"><img src="../../assets/images/home/setting.png"><span>设置</span></div>
   </div>
-
 </template>
 
 <script>
@@ -14,6 +18,24 @@
       name: "foot",
       data(){
         return{
+          page1:false,
+          page2:false,
+          page3:false,
+          page4:false,
+          page5:false,
+        }
+      },
+      created(){
+        if(this.$route.path==="/home-page"){
+            this.page1=true;
+        }if(this.$route.path==="/menu"){
+            this.page2=true;
+        }if(this.$route.path==="/order"){
+            this.page3=true;
+        }if(this.$route.path==="/shopping"){
+            this.page4=true;
+        }if(this.$route.path==="/user"){
+            this.page5=true;
         }
       },
       methods:{

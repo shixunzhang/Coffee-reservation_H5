@@ -4,6 +4,9 @@ import HelloWorld from '@/components/HelloWorld'
 
 
 import home_page from '@/views/home_page/home_page'
+import address from '@/views/address/address'
+import newAddress from '@/views/address/newAddress'
+import updateAddress from '@/views/address/updateAddress'
 import menu from '@/views/menu/menu'
 import shopping_cart from '@/views/shopping_cart/shopping_cart'
 import order from '@/views/order/order'
@@ -58,6 +61,21 @@ export default new Router({
       path:'/about',
       name:'about_us',
       component:about_us
+    },
+    {
+      path:'/address',
+      name:'address',
+      component:address
+    },
+    {
+      path:'/new-address',
+      name:'newAddress',
+      component:newAddress
+    },
+    {
+      path:'/update-address',
+      name:'updateAddress',
+      component:updateAddress
     },
     {
       path:'/user-detail',

@@ -45,8 +45,8 @@
           user:{},
           homeList:[
             {title:"立即下单",imgUrl:"/static/images/home_page/shopping.png",goPage:"/menu"},
-            {title:"更改地址",imgUrl:"/static/images/home_page/location.png",goPage:"/feedback"},
-            {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/menu"},
+            {title:"更改地址",imgUrl:"/static/images/home_page/location.png",goPage:"/address"},
+            {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/address"},
             {title:"关于我们",imgUrl:"/static/images/home_page/switch_user.png",goPage:"/about"},
           ],
           adList: [
@@ -101,7 +101,7 @@
               this.$toast("失败")
             }
           }).catch(error =>{
-            console.log("请求异常"+error)
+            this.$toast("网络开小差");
           });
         }
       },
@@ -127,7 +127,6 @@
             this.value3=true;
             this.value4 = "自提";
           }
-          console.log(this.user)
         }
       },
     }
