@@ -55,7 +55,6 @@
     watch:{
       message(val){
         this.OrderList = val;
-        console.log(this.OrderList)
       }
     },
     methods:{
@@ -71,7 +70,6 @@
         else if(num==2){
           finishFlag = 0
         }
-        console.log(num)
         this.$http.post('/api/order/list.do',
           {
             userId:this.$store.state.user_data.userId,
@@ -80,12 +78,11 @@
         ).then((res)=>{
           if(res.data.success){
             this.OrderList = res.data.data
-            console.log(this.OrderList)
           }else{
-
+            this.$toast(res.data.msg)
           }
         }).catch(error =>{
-          console.log("请求异常"+error)
+          this.$toast("网络开小差")
         })
       },
       goToShopping(){

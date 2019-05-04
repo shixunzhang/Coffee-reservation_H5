@@ -112,12 +112,11 @@
           ).then((res)=>{
             if(res.data.success){
               this.MenuList = res.data.data
-              console.log(this.MenuList)
             }else{
               this.$toast("查询商品列表失败")
             }
           }).catch(error =>{
-            console.log("请求异常"+error)
+            this.$toast("网络开小差")
           })
         },
         AddCoffee(num){
@@ -158,12 +157,6 @@
           this.win_display = false;
         },
         submitBtn(){
-          console.log(this.goods_size);
-          console.log(this.goods_sugar);
-          console.log(this.goods_num*this.goods_price);
-          console.log(this.goods_id);
-          console.log(this.goods_name);
-          console.log(this.goods_num);
           this.$http.post('/api/shopping/addShopping.do',
             {
               goodSize:this.goods_size,
@@ -184,7 +177,7 @@
               this.win_display = false;
             }
           }).catch(error =>{
-            console.log("请求异常"+error)
+            this.$toast("网络开小差")
             this.win_display = false;
           })
         }

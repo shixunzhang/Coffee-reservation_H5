@@ -95,7 +95,6 @@
             }
           }).catch(error =>{
             this.$toast('服务器开小差');
-            console.log("请求异常"+error)
           });
         },
         getSmsCode(){
@@ -132,7 +131,6 @@
             }
           }).catch(error =>{
             this.$toast('服务器开小差');
-            console.log("请求异常"+error)
           });
         },
         loginValidate(){
@@ -166,7 +164,6 @@
             }
           }).catch(error =>{
             this.$toast('服务器开小差');
-            console.log("请求异常"+error)
           });
         },
         goRegister(){

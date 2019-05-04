@@ -30,7 +30,6 @@
       name: "find_password",
       data(){
         return{
-
         }
       },
       methods:{

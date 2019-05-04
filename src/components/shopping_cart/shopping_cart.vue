@@ -110,17 +110,16 @@
               },
             ).then((res)=>{
               if(res.data.success){
-                this.$toast("成功");
                 this.ShoppingList[num].shoppingNumber=this.ShoppingList[num].shoppingNumber-1;
                 this.ShoppingList[num].totalPrice=(this.ShoppingList[num].goodPrice*(this.ShoppingList[num].shoppingNumber));
                 if(this.checkList[num].flag===true){
                   this.total_price=(this.total_price-this.ShoppingList[num].goodPrice)
                 }
               }else{
-                this.$toast("失败")
+                this.$toast(res.data.msg)
               }
             }).catch(error =>{
-              console.log("请求异常"+error)
+              this.$toast("网络开小差")
             })
           }
         },
@@ -134,7 +133,6 @@
               },
             ).then((res)=>{
               if(res.data.success){
-                this.$toast("成功");
                 if(this.checkList[this.select_num].flag===true){
                   this.total_price=(this.total_price-this.ShoppingList[this.select_num].goodPrice)
                 }
@@ -142,10 +140,10 @@
                 this.checkList.splice(this.select_num,1);
                 this.msg_win = false;
               }else{
-                this.$toast("失败")
+                this.$toast(res.data.msg)
               }
             }).catch(error =>{
-              console.log("请求异常"+error)
+              this.$toast("网络开小差")
             })
         },
         // 数量为1 关闭提示窗口

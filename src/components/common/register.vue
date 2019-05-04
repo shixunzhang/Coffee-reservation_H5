@@ -71,7 +71,6 @@
             },
           ).then((res)=>{
             if(res.data.success){
-              console.log(res.data);
               const TIME_COUNT = 60;
               if (!this.timer) {
                 this.count = TIME_COUNT;
@@ -90,7 +89,7 @@
               this.$toast(res.data.msg)
             }
           }).catch(error =>{
-            console.log("请求异常"+error)
+            this.$toast("网络开小差");
           });
         },
         register(){
@@ -135,7 +134,7 @@
               this.$toast(res.data.msg)
             }
           }).catch(error =>{
-            console.log("请求异常"+error)
+            this.$toast("网络开小差");
           });
         }
       }

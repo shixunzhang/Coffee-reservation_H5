@@ -77,11 +77,10 @@
               if(res.data.success){
                 this.$toast("成功");
               }else{
-                this.$toast("失败")
+                this.$toast(res.data.msg)
               }
             }).catch(error =>{
               this.$toast('服务器开小差');
-              console.log("请求异常"+error)
             });
             return
           }
@@ -96,11 +95,10 @@
             if(res.data.success){
               this.$toast("成功");
             }else{
-              this.$toast("失败")
+              this.$toast(res.data.msg)
             }
           }).catch(error =>{
             this.$toast('服务器开小差');
-            console.log("请求异常"+error)
           });
         }
       }

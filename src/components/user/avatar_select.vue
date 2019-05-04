@@ -71,16 +71,16 @@
               this.select_show=false;
               this.$toast("成功");
             }else{
-              this.$toast("失败")
+              this.$toast(res.data.msg);
             }
           }).catch(error =>{
-            console.log("请求异常"+error)
+            this.$toast("网络开小差")
           });
         },
         changeImgDown(){
           event.stopPropagation()
           if(this.select_num<=0){
-            console.log("已经是第一张了")
+            this.$toast("已经是第一张了");
           }else{
             this.select_num=this.select_num-1
           }
@@ -88,7 +88,7 @@
         changeImgUp(){
           event.stopPropagation()
           if((this.select_num+1)===this.avatarList.length){
-            console.log("已经是最后一张了")
+            this.$toast("已经是最后一张了");
           }else{
             this.select_num=this.select_num+1
           }
