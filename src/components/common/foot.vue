@@ -4,8 +4,8 @@
     <div v-if="page1" class="foot-img" @click="GoHome"><img src="../../assets/images/home/home.png"><span>首页</span></div>
     <div v-if="!page2" class="foot-img" @click="GoMenu"><img src="../../assets/images/home/coffee.png"><span>菜单</span></div>
     <div v-if="page2" class="foot-img" @click="GoMenu"><img src="../../assets/images/home/coffee(1).png"><span>菜单</span></div>
-    <div v-if="!page3" class="foot-img" @click="GoOrder"><img src="../../assets/images/home/dingdan(1).png"><span>订单</span></div>
-    <div v-if="page3" class="foot-img" @click="GoOrder"><img src="../../assets/images/home/dingdan(2).png"><span>订单</span></div>
+    <div v-if="!page3" class="foot-img" @click="GoOrder"><img src="../../assets/images/home/dingdan.png"><span>订单</span></div>
+    <div v-if="page3" class="foot-img" @click="GoOrder"><img src="../../assets/images/home/dingdan1.png"><span>订单</span></div>
     <div v-if="!page4" class="foot-img" @click="GoShopping"><img class="foot-car-img" src="../../assets/images/home/car(1).png"><span class="foot-car-text">购物车</span></div>
     <div v-if="page4" class="foot-img" @click="GoShopping"><img class="foot-car-img" src="../../assets/images/home/car.png"><span class="foot-car-text">购物车</span></div>
     <div v-if="!page5" class="foot-img" @click="GoUser"><img src="../../assets/images/home/setting1.png"><span>设置</span></div>
