@@ -31,7 +31,7 @@
 
       <div class="open_new">
         <span class="login" @click="goLogin()">已有账号，去登陆</span>
-        <span class="find" @click="goFindPassword()">忘记密码</span>
+        <!--<span class="find" @click="goFindPassword()">忘记密码</span>-->
       </div>
     </div>
 </template>

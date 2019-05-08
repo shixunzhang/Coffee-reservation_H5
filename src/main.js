@@ -13,8 +13,6 @@ import VueAxios from 'vue-axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
-//导入mock文件
-// import Mock from './mock'
 //导入自定义lib-flexible
 import '@/assets/script/flexible'
 //导入mint-ui作为ui组件库

@@ -80,14 +80,24 @@
           checkList:[],
           settlement:[],
           selectIdList:[],
+          idList:[],
         }
       },
       watch:{
         message(val){
           this.ShoppingList = val;
+          this.checkList = [];
           for (let i=0; i<this.ShoppingList.length; i++){
-            this.checkList.push({"flag":false});
+            this.checkList.push({"flag":false,"id":this.ShoppingList[i].shoppingId});
           }
+          let that = this;
+          this.checkList.forEach(function (item) {
+            that.idList.forEach(function (sel) {
+              if(item.id===sel){
+                item.flag = true;
+              }
+            })
+          });
         }
       },
       methods:{
@@ -170,22 +180,25 @@
               this.$toast(res.data.msg)
             }
           }).catch(error =>{
-            console.log("请求异常"+error)
+            this.$toast("网络开小差");
           })
         },
         // 更改选中状态
         changeChecked(num){
           this.checkList[num].flag=!this.checkList[num].flag;
           if(this.checkList[num].flag===true){
+            this.idList.push(this.ShoppingList[num].shoppingId);
             this.total_price= this.total_price+this.ShoppingList[num].totalPrice
           }else{
+            let ind = this.idList.indexOf(this.ShoppingList[num].shoppingId);
+            this.idList.splice(ind,1);
             this.total_price= this.total_price-this.ShoppingList[num].totalPrice
           }
         },
         // 下单
         addOrder(){
           if(this.total_price===0){
-            this.$toast("请先选择结算商品")
+            this.$toast("请先选择结算商品");
             return
           }
           let me = this;
@@ -220,7 +233,7 @@
               this.$toast(res.data.msg)
             }
           }).catch(error =>{
-            console.log("请求异常"+error)
+            this.$toast("网络开小差");
           });
         },
       }

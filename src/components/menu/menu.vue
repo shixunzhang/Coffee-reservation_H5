@@ -173,11 +173,11 @@
             if(res.data.success){
               this.win_display = false;
             }else{
-              this.$toast("加入购物车失败")
+              this.$toast("加入购物车失败");
               this.win_display = false;
             }
           }).catch(error =>{
-            this.$toast("网络开小差")
+            this.$toast("网络开小差");
             this.win_display = false;
           })
         }

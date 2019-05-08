@@ -43,7 +43,7 @@
 
     <div class="open_new">
       <span class="register" @click="goRegister()">注册新账号</span>
-      <span class="find" @click="goFindPassword()">忘记密码</span>
+      <!--<span class="find" @click="goFindPassword()">忘记密码</span>-->
     </div>
 
   </div>

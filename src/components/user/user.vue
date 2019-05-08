@@ -68,6 +68,10 @@
         border: 2px solid #333333;
         margin: 50px 30px 0 50px;
       }
+      span{
+        position: absolute;
+        top: 1rem;
+      }
     }
     .user-center-body-msg{
       ul{
