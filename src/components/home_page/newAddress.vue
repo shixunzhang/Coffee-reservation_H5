@@ -97,11 +97,12 @@
   }
   .address-msg-ul{
     margin-top: 120px;
+    font-size: 0.36rem;
     li{
       border-bottom: 1px solid #999999;
-      height: 60px;
+      height: 85px;
       input{
-        height: 100%;
+        height: 95%;
         padding: 0 0.5rem;
         width: 80%;
       }

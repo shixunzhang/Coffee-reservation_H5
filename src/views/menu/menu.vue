@@ -12,7 +12,7 @@
   import  vMenu from "@/components/menu/menu";
   import  vFoot from "@/components/common/foot";
   export default {
-    name: "mune",
+    name: "menus",
     components: {
       vMenu,
       vFoot
@@ -34,12 +34,11 @@
       ).then((res)=>{
         if(res.data.success){
           this.$data.DATA = res.data.data
-          console.log(this.$data.DATA)
         }else{
-
+          this.$toast(res.data.msg)
         }
       }).catch(error =>{
-        console.log("请求异常"+error)
+        this.$toast("网络开小差")
       })
     },
     methods: {

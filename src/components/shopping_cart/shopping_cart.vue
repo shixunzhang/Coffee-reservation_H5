@@ -24,7 +24,7 @@
             </div>
             <div class="select-div" v-if="checkList[key].flag"  @click="changeChecked(key)">
             </div>
-            <div class="shopping-name">{{item.goodName}}</div>
+            <div class="shopping-name"><span>{{item.goodName}}</span></div>
             <div class="shopping-num">
               <img class="shopping-down-img" src="../../assets/images/home_page/minus-circle.png" @click="shoppingDown(key)">
               <span>{{item.shoppingNumber}}</span>
@@ -58,6 +58,29 @@
     <div class="emptyMag" v-if="ShoppingList.length===0">购物车中空空如也...
       <p @click="goToMenu()">去菜单中挑选</p>
     </div>
+    <div class="pain-box" v-if="msg2_win">
+      <div class="black-box">
+      </div>
+      <div class="pain-base-box">
+        <img class="close-img" src="/static/images/home_page/close-circle.png" @click="closeWin()">
+        <ul class="show-address">
+          <li>
+            <span>收货地址：</span>{{mainAddress}}
+          </li>
+        </ul>
+        <ul class="show-pain-method">
+          <li @click="commitOrder(1)">
+            支付宝支付
+          </li>
+          <li @click="commitOrder(2)">
+            微信支付
+          </li>
+          <li @click="commitOrder(3)">
+            银联支付
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="settlement-total-box">
       应付合计：<span>￥{{total_price}}</span>
       <div class="goto-settlement" @click="addOrder()">去结算</div>
@@ -67,14 +90,19 @@
 </template>
 
 <script>
+  import { Toast } from "mint-ui";
     export default {
       name: "shopping_cart",
       props:["message"],
       data(){
         return{
-        search_type:0,
+          address:'自提订单',
+          addressList:[],
+          mainAddress:'',
+          search_type:0,
           select_num:0,
           msg_win:false,
+          msg2_win:false,
           total_price:0,
           ShoppingList:[],
           checkList:[],
@@ -100,10 +128,38 @@
           });
         }
       },
+      created(){
+        let that = this;
+        this.$http.post('/api/address/addressList.do',
+          {
+            userId:this.$store.state.user_data.userId
+          },
+        ).then((res)=>{
+          if(res.data.success){
+            this.addressList = res.data.data;
+            if(this.$store.state.user_data.takeOut===1){
+              this.addressList.forEach(function (item) {
+                if(item.addressId===that.$store.state.user_data.userAddress){
+                  that.mainAddress=item.address;
+                }
+              })
+            }else{
+              this.mainAddress='自提订单';
+            }
+          }else{
+            this.$toast(res.data.msg);
+          }
+        }).catch(error =>{
+          this.$toast("网络开小差")
+        })
+      },
       methods:{
         // 跳转到菜单页面
         goToMenu(){
           this.$router.push('/menu')
+        },
+        closeWin(){
+          this.msg2_win=false;
         },
         // 商品数量减1
         shoppingDown(num){
@@ -201,6 +257,24 @@
             this.$toast("请先选择结算商品");
             return
           }
+          this.msg2_win=true;
+        },
+        commitOrder(num){
+          console.log(num);
+          if(num===1){
+            this.toastInstanse = Toast({
+              message: "2秒我就消失", //弹窗内容
+              position: "middle", //弹窗位置
+              duration: -1, //弹窗时间毫秒,如果值为-1，则不会消失
+              iconClass: "glyphicon glyphicon-heart", //设置 图标类
+              className: "mytoast" //自定义Toast 样式，需要自己提供一个类名
+            });
+            this.$toast("选择支付宝下单,功能正在对接，暂时默认成功");
+          }else if(num===2){
+            this.$toast("选择微信下单,功能正在对接，暂时默认成功");
+          }else if(num===3){
+            this.$toast("选择银联下单,功能正在对接，暂时默认成功");
+          }
           let me = this;
           this.settlement=[];
           this.selectIdList=[];
@@ -222,7 +296,8 @@
             },
           ).then((res)=>{
             if(res.data.success){
-              this.$toast("成功");
+              this.$toast("下单成功,请留意是否完成");
+              this.msg2_win=false;
               this.ShoppingList = ShoppingListLeft;
               this.checkList=[];
               for (let i=0; i<this.ShoppingList.length; i++){
@@ -235,7 +310,7 @@
           }).catch(error =>{
             this.$toast("网络开小差");
           });
-        },
+        }
       }
     }
 </script>
@@ -250,7 +325,7 @@
       right: 0;
       bottom: 0;
       background: rgba(0,0,0,0.3);
-      z-index: 200;
+      z-index: 100;
     }
     /*选择提示窗口*/
     .js-tips-modal{
@@ -331,12 +406,16 @@
       }
       .shopping-name{
         font-size: 35px;
-        width: 40%;
+        width: 4.5rem;
         color: #333;
         text-align: left;
         position: relative;
         top: 30px;
-        left: 100px;
+        left: 1rem;
+        span{
+        position: relative;
+        left: -0.5rem;
+        }
       }
       .shopping-price-total{
         float: right;
@@ -359,7 +438,7 @@
         display: inline-block;
         position: relative;
         top: 25px;
-        left: 20px;
+        left: 30px;
       }
       .shopping-good-size{
         font-size: 25px;
@@ -378,6 +457,48 @@
         margin-top: 20px;
         font-size: 26px;
         color: #4d86f1;
+      }
+    }
+    .pain-box{
+      z-index: 200;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      .black-box{
+        background-color: #999999;
+        height: 50%;
+      }
+      .pain-base-box{
+        background-color: #ffffff;
+        height: 50%;
+        .close-img{
+          height: 0.8rem;
+          width: 0.8rem;
+          position: relative;
+          left: 85%;
+          top: 0.2rem;
+        }
+        .show-address{
+          height: 16%;
+          li{
+            text-align: left;
+            font-size: 0.35rem;
+            line-height: 2rem;
+            padding: 0 60px;
+          }
+        }
+        .show-pain-method{
+          li{
+            text-align: center;
+            font-size: 0.36rem;
+            color: #ffffff;
+            height: 0.8rem;
+            line-height: 0.8rem;
+            background-color: #4d86f1;
+            margin: 0.8rem 0.8rem 0.8rem 0.8rem;
+          }
+        }
       }
     }
     /*去结算div*/

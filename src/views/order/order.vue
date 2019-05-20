@@ -27,20 +27,19 @@
     },
       created(){
 
-        this.$http.post('/api/order/list.do',
+        this.$http.post('/api/order/listOrder.do',
           {
             userId:this.$store.state.user_data.userId,
             finishFlag:3
           },
         ).then((res)=>{
           if(res.data.success){
-            this.$data.DATA = res.data.data
-            console.log(this.$data.DATA)
+            this.$data.DATA = res.data.data;
           }else{
-
+            this.$toast(res.data.msg)
           }
         }).catch(error =>{
-          console.log("请求异常"+error)
+          this.$toast("网络开小差")
         })
       },
       methods: {

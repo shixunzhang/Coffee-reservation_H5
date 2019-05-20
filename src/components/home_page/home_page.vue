@@ -5,7 +5,7 @@
       <div class="swiper-container">
         <ul class="swiper-wrapper">
           <li class="swiper-slide" v-for="item of adList">
-            <img :src="item.imgSrc" @click="handleHref(item.id)">
+            <img :src="item.imgSrc" @click="handleHref(item.url)">
           </li>
         </ul>
         <div class="swiper-pagination"></div>
@@ -28,6 +28,9 @@
         </li>
       </ul>
     </div>
+    <div class="map-box">
+      <img src="/static/images/ad/map.png">
+    </div>
 
 
   </div>
@@ -44,37 +47,38 @@
           value4: "自提",
           user:{},
           homeList:[
-            {title:"立即下单",imgUrl:"/static/images/home_page/shopping.png",goPage:"/menu"},
-            {title:"更改地址",imgUrl:"/static/images/home_page/location.png",goPage:"/address"},
-            {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/address"},
-            {title:"关于我们",imgUrl:"/static/images/home_page/switch_user.png",goPage:"/about"},
+            {title:"挑选商品",imgUrl:"/static/images/home_page/coffee.png",goPage:"/menu"},
+            {title:"立即下单",imgUrl:"/static/images/home_page/shopping.png",goPage:"/shopping"},
+            // {title:"收货地址",imgUrl:"/static/images/home_page/location.png",goPage:"/address"},
+            // {title:"关于我们",imgUrl:"/static/images/home_page/switch_user.png",goPage:"/about"},
           ],
           adList: [
             {
-              imgSrc: '/static/images/ad/ad1.jpg',
+              imgSrc: '/static/images/ad/ad3.jpg',
               adTitle: '广告标题',
-              url: 'xxx'
+              url: '/menu'
             },
             {
               imgSrc: '/static/images/ad/ad2.jpg',
               adTitle: '广告标题',
-              url: 'xxx'
+              url: '/menu'
             },
             {
-              imgSrc: '/static/images/ad/ad3.jpg',
+              imgSrc: '/static/images/ad/ad1.jpg',
               adTitle: '广告标题',
-              url: 'xxx'
+              url: '/menu'
             },
             {
               imgSrc: '/static/images/ad/ad4.jpg',
               adTitle: '广告标题',
-              url: 'xxx'
+              url: '/menu'
             }
           ]
         }
       },
       methods: {
         handleHref(url) {
+          this.$router.push(url)
         },
         change(){
           if(this.value3===true){
@@ -96,9 +100,12 @@
               }else if(flag===1){
                 this.value4 = "外卖"
               }
-              this.$toast("成功");
+              this.$toast('更新为'+this.value4+'成功');
+              let user = this.$store.state.user_data;
+              user.takeOut =flag;
+              this.$store.commit('USER_DATA',user);
             }else{
-              this.$toast("失败")
+              this.$toast("更改外卖自提状态失败")
             }
           }).catch(error =>{
             this.$toast("网络开小差");
@@ -172,6 +179,13 @@
         /*float: right;*/
       }
     }
+    .map-box{
+      img{
+        width: 100%;
+        margin-top: 0.5rem;
+        padding: 0 0.2rem;
+      }
+    }
     .advertising-wrapper {
       padding: 30px;
       border-radius: 10px;
@@ -184,7 +198,7 @@
         }
         img {
           width: 100%;
-          height: 350px;
+          height: 400px;
           margin-bottom: 30px;
         }
       }

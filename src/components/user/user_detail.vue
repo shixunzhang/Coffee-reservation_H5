@@ -46,12 +46,12 @@
           +86 {{userMsg.userPhone}}
         </span>
       </li>
-      <li @click="changeUserMessage(3)">
-        <span>
-          修改密码
-        </span>
-        <img class="img-right-goto" src="../../assets/images/home_page/right.png">
-      </li>
+      <!--<li @click="changeUserMessage(3)">-->
+        <!--<span>-->
+          <!--修改密码-->
+        <!--</span>-->
+        <!--<img class="img-right-goto" src="../../assets/images/home_page/right.png">-->
+      <!--</li>-->
       <!--<li @click="changeUserMessage(4)">-->
         <!--<span>-->
           <!--收货地址-->

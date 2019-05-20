@@ -13,24 +13,46 @@
 
     <!--菜单列表-->
     <div class="order">
-      <ul>
-        <li v-for="item in OrderList">
-          <div class="menu-right">
-            <div class="menu-name">
-              {{item.orderNo}}{{item.totalPrice}}{{item.goodName}}
-            </div>
-            <div class="menu-name-en">
-              {{item.orderAddress}}
-              {{item.goodsSize}}
-            </div>
-          </div>
-          <div class="menu-price">
-            ￥{{item.totalPrice}}
-          </div>
+      <ul class="order-list-uls">
+        <li class="order-list-lis" v-for="item in OrderList">
+          <ul>
+            <p class="order-no">{{item.orderList[0].orderNo}}</p>
+            <p class="order-address" v-if="item.orderList[0].orderAddress === '-1'">自提订单</p>
+            <p class="order-address" v-if="item.orderList[0].orderAddress != '-1'">{{item.orderList[0].orderAddress}}</p>
+            <li class="order-list-li" v-for="item1 in item.orderList">
+              <div class="menu-right">
+                <div class="menu-name">
+                 {{item1.goodName}} * {{item1.orderNumber}}
+                </div>
+                <div class="menu-price">
+                  ￥<span class="span-price">{{item1.totalPrice}}</span>
+                </div>
+                <div class="shopping-good-size-box" v-if="item1.goodsCategory!==3">
+                  <div class="shopping-good-size" v-if="item1.goodsSize===1">
+                    小杯
+                  </div>
+                  <div class="shopping-good-size" v-else-if="item1.goodsSize===2">
+                    中杯
+                  </div>
+                  <div class="shopping-good-size" v-else-if="item1.goodsSize===3">
+                    大杯
+                  </div>
+                </div>
+                <div class="shopping-good-sugar-box" v-if="item1.goodsCategory===1">
+                  <div class="shopping-good-sugar" v-if="item1.goodsSugar===0">
+                    无糖
+                  </div>
+                  <div class="shopping-good-sugar" v-if="item1.goodsSugar===1">
+                    加糖
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
-    <div class="emptyMsg" v-if="OrderList.length===0">
+    <div class="emptyMsg" v-if="!OrderList">
       <span>还没有相关订单</span>
       <p @click="goToShopping()">去购物车中下单</p>
     </div>
@@ -70,7 +92,7 @@
         else if(num==2){
           finishFlag = 0
         }
-        this.$http.post('/api/order/list.do',
+        this.$http.post('/api/order/listOrder.do',
           {
             userId:this.$store.state.user_data.userId,
             finishFlag:finishFlag
@@ -140,8 +162,51 @@
       }
     }
     .order{
-      ul{
-        margin-top: 1.6rem;
+      /*background-color: #;*/
+      .order-list-uls{
+        margin-top: 1.5rem;
+        font-size: 0.373333rem;
+        margin-bottom: 1.2rem;
+      }
+      .order-list-lis{
+        border-bottom: 1px solid #999999;
+        padding: 0.1rem 0.266667rem 0.233333rem 0.4rem;
+        .order-no{
+          color: #333;
+          margin: 5px 0 5px 0;
+        }
+        .order-address{
+          color: #4d86f1;
+          margin-bottom: 15px;
+        }
+      }
+      .order-list-li{
+        .shopping-good-size-box{
+          font-size: 0.31rem;
+          display: inline-block;
+          width: 20%;
+        }
+        .shopping-good-sugar-box{
+          font-size: 0.31rem;
+          display: inline-block;
+          width: 20%;
+        }
+        .menu-name{
+          display: inline-block;
+          width: 80%;
+        }
+        .menu-price{
+          display: inline-block;
+          text-align: right;
+          width: 15%;
+          .span-price{
+            font-size: 35px;
+            color: #f47f00;
+          }
+        }
+        .menu-right{
+          margin: 20px 0 20px 0;
+        }
       }
     }
 

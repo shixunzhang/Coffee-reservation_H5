@@ -29,13 +29,18 @@
           },
         ).then((res)=>{
           if(res.data.success){
-            this.$data.USER = res.data.data
+            this.$data.USER = res.data.data;
             this.$store.commit('USER_DATA',res.data.data);
           }else{
-            console.log(res.data)
+            if(res.data.msg==='用户不存在'){
+              this.$toast("登录信息失效，请重新登录");
+              this.$router.push('/login')
+            }else{
+              this.$toast(res.data.msg)
+            }
           }
         }).catch(error =>{
-          console.log("请求异常"+error)
+          this.$toast("网络开小差")
         })
       },
       getAddressList(){
@@ -46,12 +51,11 @@
         ).then((res)=>{
           if(res.data.success){
             this.$data.DATA = res.data.data;
-            console.log(this.$data.DATA)
           }else{
-            console.log(res.data)
+            this.$toast(res.data.msg);
           }
         }).catch(error =>{
-          console.log("请求异常"+error)
+          this.$toast("网络开小差")
         })
       }
     }

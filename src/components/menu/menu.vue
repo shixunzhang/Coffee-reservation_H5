@@ -75,7 +75,7 @@
 
 <script>
     export default {
-      name: "menu",
+      name: "menus",
       props:["message"],
       data(){
         return{
