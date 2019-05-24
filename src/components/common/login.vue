@@ -88,13 +88,22 @@
           ).then((res)=>{
             if(res.data.success){
               this.$store.commit('USER_DATA',res.data.data);
-              this.$toast("登录成功");
+              this.$toast({
+                duration: 1000,
+                message: '登录成功'
+              });
               this.$router.push('/home-page')
             }else{
-              this.$toast(res.data.msg)
+              this.$toast({
+                duration: 1000,
+                message: res.data.msg
+              });
             }
           }).catch(error =>{
-            this.$toast('服务器开小差');
+            this.$toast({
+              duration: 1000,
+              message: '服务器开小差'
+            });
           });
         },
         getSmsCode(){
@@ -127,10 +136,16 @@
                 }, 1000)
               }
             }else{
-              this.$toast(res.data.msg)
+              this.$toast({
+                duration: 1000,
+                message:res.data.msg
+              });
             }
           }).catch(error =>{
-            this.$toast('服务器开小差');
+            this.$toast({
+              duration: 1000,
+              message:'服务器开小差'
+            });
           });
         },
         loginValidate(){
@@ -160,10 +175,16 @@
               this.$store.commit('USER_DATA',res.data.data);
               this.$router.push('/home-page')
             }else{
-              this.$toast(res.data.msg)
+              this.$toast({
+                duration: 1000,
+                message: res.data.msg
+              });
             }
           }).catch(error =>{
-            this.$toast('服务器开小差');
+            this.$toast({
+              duration: 1000,
+              message:'服务器开小差'
+            });
           });
         },
         goRegister(){

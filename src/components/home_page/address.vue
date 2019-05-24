@@ -161,6 +161,7 @@
       position: relative;
       left: 90%;
       top: -0.8rem;
+      width: 1rem;
     }
   }
   .emptyMag{

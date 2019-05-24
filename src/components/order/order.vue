@@ -66,6 +66,11 @@
     data(){
       return{
         search_type:0,
+        pageNo: 1,
+        pageSize: 10,
+        tips: '努力加载中...',
+        REQUIRE: true,
+        loading: false,
         showList:[
           {title:"全部"},
           {title:"已完成"},
@@ -74,14 +79,77 @@
         OrderList:[]
       }
     },
+    mounted() {
+      // // 添加滚动事件，检测滚动到页面底部
+      window.addEventListener('scroll', this.scrollBottom)
+    },
     watch:{
       message(val){
         this.OrderList = val;
       }
     },
     methods:{
+      scrollBottom() {
+        let clientHeight = document.body.clientHeight;
+        let scrollHeight = window.innerHeight;
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+        if (scrollTop + scrollHeight >= clientHeight && this.REQUIRE) {
+          // 请求的数据未加载完成时，滚动到底部不再请求前一页的数据
+          this.REQUIRE = false;
+          this.loading = true;
+          this.tips = '努力加载中...';
+          this.pageNo = this.pageNo + 1;
+
+          let finishFlag;
+          if (this.search_type === 0) {
+            finishFlag = 3
+          }
+          else if(this.search_type===1){
+            finishFlag = 1
+          }
+          else if(this.search_type===2){
+            finishFlag = 0
+          }
+          let that = this;
+          this.$http.post('/api/order/listOrder.do',
+            {
+              userId:this.$store.state.user_data.userId,
+              finishFlag:finishFlag,
+              pageNum: this.pageNo,
+              pageSize: this.pageSize
+            },
+          ).then((res)=>{
+            if(res.data.success){
+              if(res.data.data!=null){
+                res.data.data.forEach(function (item) {
+                  that.OrderList.push(item)
+                })
+              }
+              if (res.data.data==null || res.data.data.length < 10) {
+                this.REQUIRE = false;
+                this.loading = true;
+                this.tips = '已经到底了...';
+              } else {
+                this.REQUIRE = true;
+                this.loading = false;
+                this.tips = '努力加载中...';
+              }
+            }else{
+              this.$toast(res.data.msg)
+            }
+          }).catch(error =>{
+            this.$toast("网络开小差");
+            console.log(error)
+        })
+        }
+      },
       changeSearchTitle(num){
         this.search_type = num;
+        this.pageNo=1;
+        this.REQUIRE = true;
+        document.documentElement.scrollTop=0;
+        document.body.scrollTop=0;
         let finishFlag;
         if (num == 0) {
           finishFlag = 3
@@ -95,7 +163,9 @@
         this.$http.post('/api/order/listOrder.do',
           {
             userId:this.$store.state.user_data.userId,
-            finishFlag:finishFlag
+            finishFlag:finishFlag,
+            pageNum: this.pageNo,
+            pageSize: this.pageSize
           },
         ).then((res)=>{
           if(res.data.success){

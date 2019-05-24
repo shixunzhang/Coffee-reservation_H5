@@ -30,7 +30,9 @@
         this.$http.post('/api/order/listOrder.do',
           {
             userId:this.$store.state.user_data.userId,
-            finishFlag:3
+            finishFlag:3,
+            pageNum: 1,
+            pageSize: 10
           },
         ).then((res)=>{
           if(res.data.success){

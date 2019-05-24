@@ -63,9 +63,10 @@
       </div>
       <div class="pain-base-box">
         <img class="close-img" src="/static/images/home_page/close-circle.png" @click="closeWin()">
-        <ul class="show-address">
+        <ul class="show-address" v-if="addressShow">
           <li>
-            <span>收货地址：</span>{{mainAddress}}
+            <span>收货地址：</span>
+            <div class="address-text-box">{{mainAddress}}</div>
           </li>
         </ul>
         <ul class="show-pain-method">
@@ -96,13 +97,13 @@
       props:["message"],
       data(){
         return{
-          address:'自提订单',
           addressList:[],
           mainAddress:'',
           search_type:0,
           select_num:0,
           msg_win:false,
           msg2_win:false,
+          addressShow:false,
           total_price:0,
           ShoppingList:[],
           checkList:[],
@@ -138,13 +139,15 @@
           if(res.data.success){
             this.addressList = res.data.data;
             if(this.$store.state.user_data.takeOut===1){
+              this.addressShow=true;
               this.addressList.forEach(function (item) {
                 if(item.addressId===that.$store.state.user_data.userAddress){
                   that.mainAddress=item.address;
                 }
               })
             }else{
-              this.mainAddress='自提订单';
+              // this.mainAddress='自提订单';
+              this.addressShow=false;
             }
           }else{
             this.$toast(res.data.msg);
@@ -260,20 +263,27 @@
           this.msg2_win=true;
         },
         commitOrder(num){
-          console.log(num);
           if(num===1){
             this.toastInstanse = Toast({
-              message: "2秒我就消失", //弹窗内容
-              position: "middle", //弹窗位置
-              duration: -1, //弹窗时间毫秒,如果值为-1，则不会消失
-              iconClass: "glyphicon glyphicon-heart", //设置 图标类
-              className: "mytoast" //自定义Toast 样式，需要自己提供一个类名
+              message: "选择支付宝下单,功能正在对接，暂时默认成功",
+              position: "top",
+              duration: 2000,
             });
-            this.$toast("选择支付宝下单,功能正在对接，暂时默认成功");
+            // this.$toast("选择支付宝下单,功能正在对接，暂时默认成功");
           }else if(num===2){
-            this.$toast("选择微信下单,功能正在对接，暂时默认成功");
+            this.toastInstanse = Toast({
+              message: "选择微信下单,功能正在对接，暂时默认成功",
+              position: "top",
+              duration: 2000,
+            });
+            // this.$toast("选择微信下单,功能正在对接，暂时默认成功");
           }else if(num===3){
-            this.$toast("选择银联下单,功能正在对接，暂时默认成功");
+            this.toastInstanse = Toast({
+              message: "选择银联下单,功能正在对接，暂时默认成功",
+              position: "top",
+              duration: 2000,
+            });
+            // this.$toast("选择银联下单,功能正在对接，暂时默认成功");
           }
           let me = this;
           this.settlement=[];
@@ -480,12 +490,23 @@
           top: 0.2rem;
         }
         .show-address{
-          height: 16%;
+          height: 20%;
           li{
             text-align: left;
             font-size: 0.35rem;
-            line-height: 2rem;
-            padding: 0 60px;
+            /*line-height: 2rem;*/
+            padding: 5px 60px;
+          }
+          .address-text-box{
+            margin-top: 20px;
+            font-size: 0.38rem;
+            line-height: 0.6rem;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+            -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+            -webkit-line-clamp: 2; /** 显示的行数 **/
+            overflow: hidden;  /** 隐藏超出的内容 **/
           }
         }
         .show-pain-method{

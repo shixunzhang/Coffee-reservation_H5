@@ -12,8 +12,9 @@
         <li>
           <input class="phone" v-model="phone" placeholder="联系电话"></input>
         </li>
-        <li>
-          <input class="address" v-model="address" placeholder="收货地址"></input>
+        <li class="address-area">
+          <!--<input class="address" v-model="address" placeholder="收货地址"></input>-->
+          <textarea class="address" maxlength="100" cols="20" v-model="address"></textarea>
         </li>
         <li class="home-switch-li" v-if="value4">
           <mt-switch class="home-switch" v-model="value3" @change="change()">设置为默认地址</mt-switch>
@@ -219,15 +220,23 @@
   .address-msg-ul{
     margin-top: 120px;
     font-size: 0.36rem;
-  li{
-    border-bottom: 1px solid #999999;
-    height: 85px;
-  input{
-    height: 95%;
-    padding: 0 0.5rem;
-    width: 80%;
-  }
-}
+    li{
+      border-bottom: 1px solid #999999;
+      height: 85px;
+      input{
+        height: 95%;
+        padding: 0 0.5rem;
+        width: 80%;
+      }
+    }
+    .address-area{
+      height: 200px;
+      .address{
+        height: 190px;
+        width: 100%;
+        padding: 20px 0.5rem;
+      }
+   }
 }
   .commit-btn{
     margin-top: 80px;
